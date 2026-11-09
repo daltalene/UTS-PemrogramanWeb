@@ -1,13 +1,13 @@
 <?php
-// Data 12 mobil yang disesuaikan persis dengan foto car-1.jpg s/d car-12.jpg
+// Data 12 mobil yang disesuaikan persis dengan foto car-1.jpg s/d car-12.jpg (Harga Rupiah)
 $cars = [
     1 => [
         'nama' => 'Mercedes SLK Roadster',
         'merek' => 'Mercedes-Benz',
         'gambar' => 'images/car-1.jpg',
-        'jam' => 50,
-        'hari' => 500,
-        'minggu' => 3000,
+        'jam' => 750000,
+        'hari' => 7500000,
+        'minggu' => 45000000,
         'kecepatan' => '40,000 KM',
         'transmisi' => 'Automatic',
         'kursi' => '2 Kursi',
@@ -17,9 +17,9 @@ $cars = [
         'nama' => 'Range Rover Sport SUV',
         'merek' => 'Land Rover',
         'gambar' => 'images/car-2.jpg',
-        'jam' => 70,
-        'hari' => 700,
-        'minggu' => 4200,
+        'jam' => 1050000,
+        'hari' => 10500000,
+        'minggu' => 63000000,
         'kecepatan' => '25,000 KM',
         'transmisi' => 'Automatic',
         'kursi' => '7 Kursi',
@@ -29,9 +29,9 @@ $cars = [
         'nama' => 'McLaren 720S Supercar',
         'merek' => 'McLaren',
         'gambar' => 'images/car-3.jpg',
-        'jam' => 180,
-        'hari' => 1500,
-        'minggu' => 9000,
+        'jam' => 2700000,
+        'hari' => 22500000,
+        'minggu' => 135000000,
         'kecepatan' => '8,000 KM',
         'transmisi' => 'Automatic Dual-Clutch',
         'kursi' => '2 Kursi',
@@ -41,9 +41,9 @@ $cars = [
         'nama' => 'Ford Mustang GT Coupe',
         'merek' => 'Ford',
         'gambar' => 'images/car-4.jpg',
-        'jam' => 60,
-        'hari' => 600,
-        'minggu' => 3600,
+        'jam' => 900000,
+        'hari' => 9000000,
+        'minggu' => 54000000,
         'kecepatan' => '20,000 KM',
         'transmisi' => 'Manual',
         'kursi' => '4 Kursi',
@@ -53,9 +53,9 @@ $cars = [
         'nama' => 'BMW 3 Series Gran',
         'merek' => 'BMW',
         'gambar' => 'images/car-5.jpg',
-        'jam' => 65,
-        'hari' => 650,
-        'minggu' => 3900,
+        'jam' => 975000,
+        'hari' => 9750000,
+        'minggu' => 58500000,
         'kecepatan' => '15,000 KM',
         'transmisi' => 'Automatic',
         'kursi' => '5 Kursi',
@@ -65,9 +65,9 @@ $cars = [
         'nama' => 'Alfa Romeo 4C Sport',
         'merek' => 'Alfa Romeo',
         'gambar' => 'images/car-6.jpg',
-        'jam' => 80,
-        'hari' => 800,
-        'minggu' => 4800,
+        'jam' => 1200000,
+        'hari' => 12000000,
+        'minggu' => 72000000,
         'kecepatan' => '12,000 KM',
         'transmisi' => 'Automatic TCT',
         'kursi' => '2 Kursi',
@@ -77,9 +77,9 @@ $cars = [
         'nama' => 'Mercedes-Benz Luxury',
         'merek' => 'Mercedes-Benz',
         'gambar' => 'images/car-7.jpg',
-        'jam' => 75,
-        'hari' => 750,
-        'minggu' => 4500,
+        'jam' => 1125000,
+        'hari' => 11250000,
+        'minggu' => 67500000,
         'kecepatan' => '18,000 KM',
         'transmisi' => 'Automatic',
         'kursi' => '4 Kursi Convertible',
@@ -89,9 +89,9 @@ $cars = [
         'nama' => 'Jeep Wrangler Unlimited',
         'merek' => 'Jeep',
         'gambar' => 'images/car-8.jpg',
-        'jam' => 55,
-        'hari' => 550,
-        'minggu' => 3300,
+        'jam' => 825000,
+        'hari' => 8250000,
+        'minggu' => 49500000,
         'kecepatan' => '30,000 KM',
         'transmisi' => 'Automatic 4x4',
         'kursi' => '5 Kursi',
@@ -99,11 +99,11 @@ $cars = [
     ],
     9 => [
         'nama' => 'Mercedes-AMG GT S',
-        'merek' => 'Audi',
+        'merek' => 'Mercedes-AMG',
         'gambar' => 'images/car-9.jpg',
-        'jam' => 70,
-        'hari' => 700,
-        'minggu' => 4200,
+        'jam' => 1050000,
+        'hari' => 10500000,
+        'minggu' => 63000000,
         'kecepatan' => '22,000 KM',
         'transmisi' => 'Automatic S-Tronic',
         'kursi' => '5 Kursi',
@@ -111,11 +111,11 @@ $cars = [
     ],
     10 => [
         'nama' => 'Mercedes-AMG GT R',
-        'merek' => 'Porsche',
+        'merek' => 'Mercedes-AMG',
         'gambar' => 'images/car-10.jpg',
-        'jam' => 95,
-        'hari' => 950,
-        'minggu' => 5700,
+        'jam' => 1425000,
+        'hari' => 14250000,
+        'minggu' => 85500000,
         'kecepatan' => '14,000 KM',
         'transmisi' => 'Automatic Tiptronic',
         'kursi' => '5 Kursi SUV',
@@ -125,9 +125,9 @@ $cars = [
         'nama' => 'Chevrolet Corvette Stingray',
         'merek' => 'Chevrolet',
         'gambar' => 'images/car-11.jpg',
-        'jam' => 85,
-        'hari' => 850,
-        'minggu' => 5100,
+        'jam' => 1275000,
+        'hari' => 12750000,
+        'minggu' => 76500000,
         'kecepatan' => '10,000 KM',
         'transmisi' => 'Automatic',
         'kursi' => '2 Kursi',
@@ -135,11 +135,11 @@ $cars = [
     ],
     12 => [
         'nama' => 'Audi A1 Hatchback',
-        'merek' => 'Ferrari',
+        'merek' => 'Audi',
         'gambar' => 'images/car-12.jpg',
-        'jam' => 160,
-        'hari' => 1400,
-        'minggu' => 8400,
+        'jam' => 2400000,
+        'hari' => 21000000,
+        'minggu' => 126000000,
         'kecepatan' => '7,000 KM',
         'transmisi' => 'Automatic F1 Dual-Clutch',
         'kursi' => '2 Kursi',
@@ -186,7 +186,7 @@ $mobil = isset($cars[$id]) ? $cars[$id] : $cars[1];
               <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
               <li class="nav-item active"><a href="car.php" class="nav-link">Katalog</a></li>
               <li class="nav-item"><a href="login.php" class="nav-link">Login</a></li>
-              <li class="nav-item"><a href="admin.php" class="nav-link">Admin</a></li>
+              <li class="nav-item"><a href="admin.php" class="nav-link">Login Admin</a></li>
             </ul>
 	      </div>
 	    </div>
@@ -206,24 +206,24 @@ $mobil = isset($cars[$id]) ? $cars[$id] : $cars[1];
       		</div>
       	</div>
 
-        <!-- Rincian Harga Sewa Dinamis -->
+        <!-- Rincian Harga Sewa Dinamis (Rupiah) -->
         <div class="row my-4">
           <div class="col-md-4 text-center">
             <div class="bg-white p-4 rounded shadow-sm">
               <h5 class="text-muted">Sewa Per Jam</h5>
-              <h3 class="text-primary font-weight-bold">$<?php echo $mobil['jam']; ?> / Jam</h3>
+              <h3 class="text-primary font-weight-bold">Rp <?php echo number_format($mobil['jam'], 0, ',', '.'); ?> / Jam</h3>
             </div>
           </div>
           <div class="col-md-4 text-center">
             <div class="bg-white p-4 rounded shadow-sm border border-primary">
               <h5 class="text-muted">Sewa Per Hari</h5>
-              <h3 class="text-primary font-weight-bold">$<?php echo number_format($mobil['hari']); ?> / Hari</h3>
+              <h3 class="text-primary font-weight-bold">Rp <?php echo number_format($mobil['hari'], 0, ',', '.'); ?> / Hari</h3>
             </div>
           </div>
           <div class="col-md-4 text-center">
             <div class="bg-white p-4 rounded shadow-sm">
               <h5 class="text-muted">Sewa Per Minggu</h5>
-              <h3 class="text-primary font-weight-bold">$<?php echo number_format($mobil['minggu']); ?> / Minggu</h3>
+              <h3 class="text-primary font-weight-bold">Rp <?php echo number_format($mobil['minggu'], 0, ',', '.'); ?> / Minggu</h3>
             </div>
           </div>
         </div>

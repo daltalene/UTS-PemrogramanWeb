@@ -33,7 +33,7 @@
             <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
             <li class="nav-item active"><a href="car.php" class="nav-link">Katalog</a></li>
             <li class="nav-item"><a href="login.php" class="nav-link">Login</a></li>
-            <li class="nav-item"><a href="admin.php" class="nav-link">Admin</a></li>
+            <li class="nav-item"><a href="admin.php" class="nav-link">Login Admin</a></li>
           </ul>
         </div>
 	    </div>
@@ -63,7 +63,7 @@
     						<h2 class="mb-0"><a href="car-single.php?id=1">Mercedes SLK Roadster</a></h2>
     						<div class="d-flex mb-3">
 	    						<span class="cat">Mercedes-Benz</span>
-	    						<p class="price ml-auto">$500 <span>/hari</span></p>
+	    						<p class="price ml-auto">Rp 7.500.000 <span>/hari</span></p>
     						</div>
     						<p class="d-flex mb-0 d-block">
                   <a href="car-single.php?id=1" class="btn btn-primary py-2 mr-1">Book now</a> 
@@ -81,7 +81,7 @@
     						<h2 class="mb-0"><a href="car-single.php?id=2">Range Rover Sport SUV</a></h2>
     						<div class="d-flex mb-3">
 	    						<span class="cat">Land Rover</span>
-	    						<p class="price ml-auto">$700 <span>/hari</span></p>
+	    						<p class="price ml-auto">Rp 10.500.000 <span>/hari</span></p>
     						</div>
     						<p class="d-flex mb-0 d-block">
                   <a href="car-single.php?id=2" class="btn btn-primary py-2 mr-1">Book now</a> 
@@ -99,7 +99,7 @@
     						<h2 class="mb-0"><a href="car-single.php?id=3">McLaren 720S Supercar</a></h2>
     						<div class="d-flex mb-3">
 	    						<span class="cat">McLaren</span>
-	    						<p class="price ml-auto">$1,500 <span>/hari</span></p>
+	    						<p class="price ml-auto">Rp 22.500.000 <span>/hari</span></p>
     						</div>
     						<p class="d-flex mb-0 d-block">
                   <a href="car-single.php?id=3" class="btn btn-primary py-2 mr-1">Book now</a> 
@@ -117,7 +117,7 @@
     						<h2 class="mb-0"><a href="car-single.php?id=4">Ford Mustang GT Coupe</a></h2>
     						<div class="d-flex mb-3">
 	    						<span class="cat">Ford</span>
-	    						<p class="price ml-auto">$600 <span>/hari</span></p>
+	    						<p class="price ml-auto">Rp 9.000.000 <span>/hari</span></p>
     						</div>
     						<p class="d-flex mb-0 d-block">
                   <a href="car-single.php?id=4" class="btn btn-primary py-2 mr-1">Book now</a> 
@@ -135,7 +135,7 @@
     						<h2 class="mb-0"><a href="car-single.php?id=5">BMW 3 Series Gran</a></h2>
     						<div class="d-flex mb-3">
 	    						<span class="cat">BMW</span>
-	    						<p class="price ml-auto">$650 <span>/hari</span></p>
+	    						<p class="price ml-auto">Rp 9.750.000 <span>/hari</span></p>
     						</div>
     						<p class="d-flex mb-0 d-block">
                   <a href="car-single.php?id=5" class="btn btn-primary py-2 mr-1">Book now</a> 
@@ -153,7 +153,7 @@
     						<h2 class="mb-0"><a href="car-single.php?id=6">Alfa Romeo 4C Sport</a></h2>
     						<div class="d-flex mb-3">
 	    						<span class="cat">Alfa Romeo</span>
-	    						<p class="price ml-auto">$800 <span>/hari</span></p>
+	    						<p class="price ml-auto">Rp 12.000.000 <span>/hari</span></p>
     						</div>
     						<p class="d-flex mb-0 d-block">
                   <a href="car-single.php?id=6" class="btn btn-primary py-2 mr-1">Book now</a> 
@@ -171,7 +171,7 @@
     						<h2 class="mb-0"><a href="car-single.php?id=7">Mercedes-Benz Luxury</a></h2>
     						<div class="d-flex mb-3">
 	    						<span class="cat">Mercedes-Benz</span>
-	    						<p class="price ml-auto">$750 <span>/hari</span></p>
+	    						<p class="price ml-auto">Rp 11.250.000 <span>/hari</span></p>
     						</div>
     						<p class="d-flex mb-0 d-block">
                   <a href="car-single.php?id=7" class="btn btn-primary py-2 mr-1">Book now</a> 
@@ -189,7 +189,7 @@
     						<h2 class="mb-0"><a href="car-single.php?id=8">Jeep Wrangler Unlimited</a></h2>
     						<div class="d-flex mb-3">
 	    						<span class="cat">Jeep</span>
-	    						<p class="price ml-auto">$550 <span>/hari</span></p>
+	    						<p class="price ml-auto">Rp 8.250.000 <span>/hari</span></p>
     						</div>
     						<p class="d-flex mb-0 d-block">
                   <a href="car-single.php?id=8" class="btn btn-primary py-2 mr-1">Book now</a> 
@@ -207,7 +207,7 @@
     						<h2 class="mb-0"><a href="car-single.php?id=9">Mercedes-AMG GT S</a></h2>
     						<div class="d-flex mb-3">
 	    						<span class="cat">Mercedes-AMG</span>
-	    						<p class="price ml-auto">$700 <span>/hari</span></p>
+	    						<p class="price ml-auto">Rp 10.500.000 <span>/hari</span></p>
     						</div>
     						<p class="d-flex mb-0 d-block">
                   <a href="car-single.php?id=9" class="btn btn-primary py-2 mr-1">Book now</a> 
@@ -225,7 +225,7 @@
     						<h2 class="mb-0"><a href="car-single.php?id=10">Mercedes-AMG GT R</a></h2>
     						<div class="d-flex mb-3">
 	    						<span class="cat">Mercedes-AMG</span>
-	    						<p class="price ml-auto">$950 <span>/hari</span></p>
+	    						<p class="price ml-auto">Rp 14.250.000 <span>/hari</span></p>
     						</div>
     						<p class="d-flex mb-0 d-block">
                   <a href="car-single.php?id=10" class="btn btn-primary py-2 mr-1">Book now</a> 
@@ -243,7 +243,7 @@
     						<h2 class="mb-0"><a href="car-single.php?id=11">Chevrolet Corvette Stingray</a></h2>
     						<div class="d-flex mb-3">
 	    						<span class="cat">Chevrolet</span>
-	    						<p class="price ml-auto">$850 <span>/hari</span></p>
+	    						<p class="price ml-auto">Rp 12.750.000 <span>/hari</span></p>
     						</div>
     						<p class="d-flex mb-0 d-block">
                   <a href="car-single.php?id=11" class="btn btn-primary py-2 mr-1">Book now</a> 
@@ -261,7 +261,7 @@
     						<h2 class="mb-0"><a href="car-single.php?id=12">Audi A1 Hatchback</a></h2>
     						<div class="d-flex mb-3">
 	    						<span class="cat">Audi</span>
-	    						<p class="price ml-auto">$1,400 <span>/hari</span></p>
+	    						<p class="price ml-auto">Rp 21.000.000 <span>/hari</span></p>
     						</div>
     						<p class="d-flex mb-0 d-block">
                   <a href="car-single.php?id=12" class="btn btn-primary py-2 mr-1">Book now</a> 

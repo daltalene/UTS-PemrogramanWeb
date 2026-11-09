@@ -33,12 +33,11 @@
             <li class="nav-item active"><a href="index.php" class="nav-link">Home</a></li>
             <li class="nav-item"><a href="car.php" class="nav-link">Katalog</a></li>
             <li class="nav-item"><a href="login.php" class="nav-link">Login</a></li>
-            <li class="nav-item"><a href="admin.php" class="nav-link">Admin</a></li>
+            <li class="nav-item"><a href="admin.php" class="nav-link">Login Admin</a></li>
           </ul>
         </div>
       </div>
 	  </nav>
-    <!-- END nav -->
     
     <div class="hero-wrap ftco-degree-bg" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
@@ -55,7 +54,6 @@
       </div>
     </div>
 
-    <!-- Section Layanan -->
 		<section class="ftco-section">
 			<div class="container">
 				<div class="row justify-content-center mb-5">

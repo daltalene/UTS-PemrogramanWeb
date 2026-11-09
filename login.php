@@ -12,7 +12,6 @@
   </head>
   <body class="bg-light">
     
-   
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary ftco-navbar-light awake" id="ftco-navbar" style="background: #1089ff !important; top: 0; position: relative;">
       <div class="container">
         <a class="navbar-brand text-white" href="index.php">Car<span style="color: #01d28e;">Book</span></a>
@@ -25,12 +24,11 @@
             <li class="nav-item"><a href="index.php" class="nav-link text-white">Home</a></li>
             <li class="nav-item"><a href="car.php" class="nav-link text-white">Katalog</a></li>
             <li class="nav-item active"><a href="login.php" class="nav-link" style="color: #01d28e !important;">Login</a></li>
-            <li class="nav-item"><a href="admin.php" class="nav-link text-white">Admin</a></li>
+            <li class="nav-item"><a href="admin.php" class="nav-link text-white">Login Admin</a></li>
           </ul>
         </div>
       </div>
     </nav>
-    
 
     <section class="ftco-section contact-section py-5">
       <div class="container">
@@ -48,16 +46,4 @@
                 <input type="password" name="password" class="form-control" placeholder="Masukkan Password" required>
               </div>
               <div class="form-group mb-0">
-                <input type="submit" name="login" value="Login" class="btn btn-primary py-3 px-5 w-100 font-weight-bold">
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
-  </body>
-</html>
+                <input type="
