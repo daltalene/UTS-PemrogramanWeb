@@ -37,6 +37,7 @@
           <li class="nav-item"><a href="admin.php" class="nav-link">Admin</a></li>
         </ul>
       </div>
+      
 	  </nav>
     <!-- END nav -->
     
