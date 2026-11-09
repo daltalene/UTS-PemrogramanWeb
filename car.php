@@ -37,11 +37,11 @@
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item active"><a href="index.php" class="nav-link">Home</a></li>
-              <li class="nav-item"><a href="car.php" class="nav-link">Katalog</a></li>
+              <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
+              <li class="nav-item active"><a href="car.php" class="nav-link">Katalog</a></li> <!-- active pindah ke sini -->
               <li class="nav-item"><a href="login.php" class="nav-link">Login</a></li>
               <li class="nav-item"><a href="admin.php" class="nav-link">Admin</a></li>
-            </ul>
+           </ul>
           </div>
 	    </div>
 	  </nav>
