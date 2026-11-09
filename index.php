@@ -1,3 +1,8 @@
+<?php
+session_start();
+include 'koneksi.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -20,25 +25,39 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    
-	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	    <div class="container">
-        <a class="navbar-brand" href="index.php">Car<span>Book</span></a>
+
+<!-- Navbar Dinamis Multi-Level (Admin & User) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary ftco-navbar-light awake" id="ftco-navbar" style="background: #1089ff !important; top: 0; position: relative;">
+      <div class="container">
+        <a class="navbar-brand text-white" href="index.php">Car<span style="color: #01d28e;">Book</span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="oi oi-menu"></span> Menu
         </button>
 
         <div class="collapse navbar-collapse" id="ftco-nav">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active"><a href="index.php" class="nav-link">Home</a></li>
-            <li class="nav-item"><a href="car.php" class="nav-link">Katalog</a></li>
-            <li class="nav-item"><a href="login.php" class="nav-link">Login</a></li>
-            <li class="nav-item"><a href="admin.php" class="nav-link">Admin</a></li>
+            <li class="nav-item"><a href="index.php" style="color: #01d28e !important;" class="nav-link text-white">Home</a></li>
+            <li class="nav-item"><a href="car.php" class="nav-link text-white">Katalog</a></li>
+
+            <?php if (isset($_SESSION['admin'])) { ?>
+              <li class="nav-item"><a href="admin.php" class="nav-link text-white">Dashboard Admin</a></li>
+              <li class="nav-item"><a href="#" class="nav-link">Halo, <?php echo $_SESSION['admin']; ?></a></li>
+              <li class="nav-item"><a href="logout.php" class="nav-link text-white font-weight-bold" onclick="return confirm('Yakin ingin logout?')">Logout</a></li>
+
+            <?php } elseif (isset($_SESSION['user'])) { ?>
+              <li class="nav-item"><a href="#" class="nav-link">Halo, <?php echo $_SESSION['user']; ?></a></li>
+              <li class="nav-item"><a href="logout.php" class="nav-link text-white font-weight-bold" onclick="return confirm('Yakin ingin logout?')">Logout</a></li>
+
+            <?php } else { ?>
+              <li class="nav-item"><a href="login.php" class="nav-link text-white">Login</a></li>
+              <li class="nav-item"><a href="login_admin.php" class="nav-link text-white">Login Admin</a></li>
+            <?php } ?>
+
           </ul>
         </div>
       </div>
-	  </nav>
-    <!-- END nav -->
+    </nav>
+    <!-- END navbar -->
     
     <div class="hero-wrap ftco-degree-bg" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
@@ -55,7 +74,6 @@
       </div>
     </div>
 
-    <!-- Section Layanan -->
 		<section class="ftco-section">
 			<div class="container">
 				<div class="row justify-content-center mb-5">

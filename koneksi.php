@@ -1,12 +1,9 @@
 <?php
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db   = "db_rental_mobil";
+$koneksi = mysqli_connect("localhost", "root", "", "db_rental_mobil");
 
-$koneksi = mysqli_connect($host, $user, $pass, $db);
+mysqli_report(MYSQLI_REPORT_OFF);
 
 if (!$koneksi) {
-    die("Koneksi database gagal: " . mysqli_connect_error());
+    die("Koneksi gagal: " . mysqli_connect_error());
 }
 ?>

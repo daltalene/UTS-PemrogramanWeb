@@ -2,35 +2,15 @@
 session_start();
 include 'koneksi.php';
 
-if (isset($_SESSION['admin'])) {
-    header("Location: admin.php");
+if (isset($_SESSION['user'])) {
+    header("location:car.php");
     exit();
-}
-
-$error = "";
-
-if (isset($_POST['login'])) {
-    $username = mysqli_real_escape_string($koneksi, $_POST['username']);
-    $password = mysqli_real_escape_string($koneksi, $_POST['password']);
-    $query = mysqli_query($koneksi, "SELECT * FROM table_admin WHERE username='$username' AND password='$password'");
-    $cek   = mysqli_num_rows($query);
-
-    if ($cek > 0) {
-        $data = mysqli_fetch_assoc($query);
-        $_SESSION['admin'] = $data['username'];
-        $_SESSION['nama']  = $data['nama_lengkap'];
-        
-        header("Location: admin.php");
-        exit();
-    } else {
-        $error = "Username atau Password yang Anda masukkan salah!";
-    }
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Login - Carbook</title>
+    <title>Login User - Carbook</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -39,56 +19,59 @@ if (isset($_POST['login'])) {
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
-  <body>
+  <body class="bg-light">
     
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary ftco-navbar-light awake" id="ftco-navbar" style="background: #1089ff !important; top: 0; position: relative;">
       <div class="container">
-        <a class="navbar-brand" href="index.php">Car<span>Book</span></a>
+        <a class="navbar-brand text-white" href="index.php">Car<span style="color: #01d28e;">Book</span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="oi oi-menu"></span> Menu
         </button>
 
         <div class="collapse navbar-collapse" id="ftco-nav">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
-            <li class="nav-item"><a href="car.php" class="nav-link">Katalog</a></li>
-            <?php if (isset($_SESSION['admin'])): ?>
-                <li class="nav-item"><a href="admin.php" class="nav-link">Admin</a></li>
-                <li class="nav-item"><a href="logout.php" class="nav-link">Logout</a></li>
-            <?php else: ?>
-                <li class="nav-item active"><a href="login.php" class="nav-link">Login</a></li>
-            <?php endif; ?>
+            <li class="nav-item"><a href="index.php" class="nav-link text-white">Home</a></li>
+            <li class="nav-item"><a href="car.php" class="nav-link text-white">Katalog</a></li>
+            <li class="nav-item active"><a href="login.php" class="nav-link" style="color: #01d28e !important;">Login</a></li>
+            <li class="nav-item"><a href="login_admin.php" class="nav-link text-white">Login Admin</a></li>
           </ul>
         </div>
       </div>
     </nav>
 
-    <section class="ftco-section contact-section">
+    <section class="ftco-section py-5">
       <div class="container">
         <div class="row justify-content-center">
-          <div class="col-md-6 block-9 mb-md-5">
-            <h2 class="text-center mb-4">Login Admin</h2>
-            
-            <?php if (!empty($error)): ?>
-              <div class="alert alert-danger text-center mb-4" role="alert">
-                <?php echo $error; ?>
-              </div>
-            <?php endif; ?>
+          <div class="col-md-5">
+            <div class="bg-white p-5 rounded shadow-sm text-center border">
+              <h3 class="mb-4 font-weight-bold text-dark">Login Pelanggan</h3>
+              
+              <!-- ALERT ERROR MERAH PERSIS DOSEN -->
+              <?php if (isset($_GET['pesan']) && $_GET['pesan'] == 'gagal') { ?>
+                <div class="alert alert-danger text-left p-3 mb-4" role="alert" style="border-radius: 8px; font-size: 14px;">
+                  Username atau password salah.
+                </div>
+              <?php } ?>
 
-            <form action="login.php" method="POST" class="bg-light p-5 contact-form rounded shadow-sm">
-              <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" name="username" class="form-control" placeholder="Masukkan Username" required>
+              <form action="prosesLogin.php" method="POST">
+                <input type="hidden" name="level" value="user">
+                <div class="form-group text-left mb-3">
+                  <label class="font-weight-bold text-dark">Username</label>
+                  <input type="text" name="username" class="form-control" placeholder="Masukkan Username" required>
+                </div>
+                <div class="form-group text-left mb-4">
+                  <label class="font-weight-bold text-dark">Password</label>
+                  <input type="password" name="password" class="form-control" placeholder="Masukkan Password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block py-3 font-weight-bold">
+                  Masuk
+                </button>
+              </form>
+
+              <div class="mt-4">
+                <p class="mb-0 text-dark">Belum punya akun? <a href="register.php" class="text-primary font-weight-bold">Daftar Sekarang</a></p>
               </div>
-              <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" name="password" class="form-control" placeholder="Masukkan Password" required>
-              </div>
-              <div class="form-group mt-4">
-                <input type="submit" name="login" value="Login" class="btn btn-primary py-3 px-5 w-100">
-              </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
