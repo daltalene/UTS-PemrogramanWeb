@@ -19,6 +19,9 @@ if (!$mobil) {
 $harga_hari   = $mobil['harga_sewa'];
 $harga_jam    = $harga_hari * 0.10;
 $harga_minggu = $harga_hari * 6;
+// Tangkap ID dari URL, jika tidak ada default ke 1
+$id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
+$mobil = isset($cars[$id]) ?$cars[$id] :$cars[1];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,6 +43,7 @@ $harga_minggu = $harga_hari * 6;
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dark-theme.css">
   </head>
   <body>
     
@@ -85,6 +89,8 @@ $harga_minggu = $harga_hari * 6;
       				<div class="text text-center mt-4">
       					<span class="subheading"><?php echo $mobil['merk']; ?></span>
       					<h2><?php echo $mobil['nama_mobil']; ?></h2>
+      					<span class="subheading" style="color: #e50914 !important; font-weight: 700; text-transform: uppercase;"><?php echo $mobil['merek']; ?></span>
+      					<h2 class="text-white font-weight-bold"><?php echo $mobil['nama']; ?></h2>
       				</div>
       			</div>
       		</div>
@@ -108,6 +114,24 @@ $harga_minggu = $harga_hari * 6;
             <div class="bg-white p-4 rounded shadow-sm">
               <h5 class="text-muted">Sewa Per Minggu</h5>
               <h3 class="text-primary font-weight-bold">Rp <?php echo number_format($harga_minggu, 0, ',', '.'); ?> / Minggu</h3>
+        <!-- Rincian Harga Sewa Dinamis (Dark Theme) -->
+        <div class="row my-4">
+          <div class="col-md-4 text-center mb-3 mb-md-0">
+            <div class="p-4 rounded shadow-sm border" style="background-color: #1a1a1a; border-color: #333 !important;">
+              <h5 class="text-muted">Sewa Per Jam</h5>
+              <h3 class="font-weight-bold" style="color: #e50914;">Rp <?php echo number_format($mobil['jam'], 0, ',', '.'); ?> <span style="font-size: 14px; color: #888;">/ Jam</span></h3>
+            </div>
+          </div>
+          <div class="col-md-4 text-center mb-3 mb-md-0">
+            <div class="p-4 rounded shadow-sm border" style="background-color: #1a1a1a; border-color: #e50914 !important;">
+              <h5 class="text-muted">Sewa Per Hari</h5>
+              <h3 class="font-weight-bold" style="color: #e50914;">Rp <?php echo number_format($mobil['hari'], 0, ',', '.'); ?> <span style="font-size: 14px; color: #888;">/ Hari</span></h3>
+            </div>
+          </div>
+          <div class="col-md-4 text-center">
+            <div class="p-4 rounded shadow-sm border" style="background-color: #1a1a1a; border-color: #333 !important;">
+              <h5 class="text-muted">Sewa Per Minggu</h5>
+              <h3 class="font-weight-bold" style="color: #e50914;">Rp <?php echo number_format($mobil['minggu'], 0, ',', '.'); ?> <span style="font-size: 14px; color: #888;">/ Minggu</span></h3>
             </div>
           </div>
         </div>
@@ -115,7 +139,7 @@ $harga_minggu = $harga_hari * 6;
         <!-- Spesifikasi bawaan UI template Carbook -->
       	<div class="row my-4">
       		<div class="col-md d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services bg-white p-3 rounded shadow-sm">
+            <div class="media block-6 services p-3 rounded shadow-sm w-100" style="background-color: #1a1a1a; border: 1px solid #333;">
               <div class="media-body py-md-4">
               	<div class="d-flex align-items-center">
 	              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-dashboard"></span></div>
@@ -180,3 +204,4 @@ $harga_minggu = $harga_hari * 6;
     <script src="js/main.js"></script>
   </body>
 </html>
+	              	<div class="icon d-flex align-items-center justify-content-center" style="background-color: #ffcc00 !important; color: #000 !important; width: 60px; height: 60px; border-
