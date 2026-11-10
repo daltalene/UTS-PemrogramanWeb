@@ -149,7 +149,7 @@ $cars = [
 
 // Tangkap ID dari URL, jika tidak ada default ke 1
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
-$mobil = isset($cars[$id]) ? $cars[$id] : $cars[1];
+$mobil = isset($cars[$id]) ?$cars[$id] :$cars[1];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -171,6 +171,7 @@ $mobil = isset($cars[$id]) ? $cars[$id] : $cars[1];
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dark-theme.css">
   </head>
   <body>
     
@@ -199,31 +200,31 @@ $mobil = isset($cars[$id]) ? $cars[$id] : $cars[1];
       			<div class="car-details">
       				<div class="img rounded" style="background-image: url(<?php echo $mobil['gambar']; ?>); height: 400px; background-size: cover; background-position: center;"></div>
       				<div class="text text-center mt-4">
-      					<span class="subheading"><?php echo $mobil['merek']; ?></span>
-      					<h2><?php echo $mobil['nama']; ?></h2>
+      					<span class="subheading" style="color: #e50914 !important; font-weight: 700; text-transform: uppercase;"><?php echo $mobil['merek']; ?></span>
+      					<h2 class="text-white font-weight-bold"><?php echo $mobil['nama']; ?></h2>
       				</div>
       			</div>
       		</div>
       	</div>
 
-        <!-- Rincian Harga Sewa Dinamis (Rupiah) -->
+        <!-- Rincian Harga Sewa Dinamis (Dark Theme) -->
         <div class="row my-4">
-          <div class="col-md-4 text-center">
-            <div class="bg-white p-4 rounded shadow-sm">
+          <div class="col-md-4 text-center mb-3 mb-md-0">
+            <div class="p-4 rounded shadow-sm border" style="background-color: #1a1a1a; border-color: #333 !important;">
               <h5 class="text-muted">Sewa Per Jam</h5>
-              <h3 class="text-primary font-weight-bold">Rp <?php echo number_format($mobil['jam'], 0, ',', '.'); ?> / Jam</h3>
+              <h3 class="font-weight-bold" style="color: #e50914;">Rp <?php echo number_format($mobil['jam'], 0, ',', '.'); ?> <span style="font-size: 14px; color: #888;">/ Jam</span></h3>
             </div>
           </div>
-          <div class="col-md-4 text-center">
-            <div class="bg-white p-4 rounded shadow-sm border border-primary">
+          <div class="col-md-4 text-center mb-3 mb-md-0">
+            <div class="p-4 rounded shadow-sm border" style="background-color: #1a1a1a; border-color: #e50914 !important;">
               <h5 class="text-muted">Sewa Per Hari</h5>
-              <h3 class="text-primary font-weight-bold">Rp <?php echo number_format($mobil['hari'], 0, ',', '.'); ?> / Hari</h3>
+              <h3 class="font-weight-bold" style="color: #e50914;">Rp <?php echo number_format($mobil['hari'], 0, ',', '.'); ?> <span style="font-size: 14px; color: #888;">/ Hari</span></h3>
             </div>
           </div>
           <div class="col-md-4 text-center">
-            <div class="bg-white p-4 rounded shadow-sm">
+            <div class="p-4 rounded shadow-sm border" style="background-color: #1a1a1a; border-color: #333 !important;">
               <h5 class="text-muted">Sewa Per Minggu</h5>
-              <h3 class="text-primary font-weight-bold">Rp <?php echo number_format($mobil['minggu'], 0, ',', '.'); ?> / Minggu</h3>
+              <h3 class="font-weight-bold" style="color: #e50914;">Rp <?php echo number_format($mobil['minggu'], 0, ',', '.'); ?> <span style="font-size: 14px; color: #888;">/ Minggu</span></h3>
             </div>
           </div>
         </div>
@@ -231,68 +232,7 @@ $mobil = isset($cars[$id]) ? $cars[$id] : $cars[1];
         <!-- Fitur & Spesifikasi Mobil Dinamis -->
       	<div class="row my-4">
       		<div class="col-md d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services bg-white p-3 rounded shadow-sm">
+            <div class="media block-6 services p-3 rounded shadow-sm w-100" style="background-color: #1a1a1a; border: 1px solid #333;">
               <div class="media-body py-md-4">
               	<div class="d-flex align-items-center">
-	              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-dashboard"></span></div>
-	              	<div class="text pl-3">
-		                <h3 class="heading mb-0">Jarak Tempuh<span><?php echo $mobil['kecepatan']; ?></span></h3>
-	                </div>
-                </div>
-              </div>
-            </div>      
-          </div>
-          <div class="col-md d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services bg-white p-3 rounded shadow-sm">
-              <div class="media-body py-md-4">
-              	<div class="d-flex align-items-center">
-	              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-pistons"></span></div>
-	              	<div class="text pl-3">
-		                <h3 class="heading mb-0">Transmisi<span><?php echo $mobil['transmisi']; ?></span></h3>
-	                </div>
-                </div>
-              </div>
-            </div>      
-          </div>
-          <div class="col-md d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services bg-white p-3 rounded shadow-sm">
-              <div class="media-body py-md-4">
-              	<div class="d-flex align-items-center">
-	              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-car-seat"></span></div>
-	              	<div class="text pl-3">
-		                <h3 class="heading mb-0">Kapasitas<span><?php echo $mobil['kursi']; ?></span></h3>
-	                </div>
-                </div>
-              </div>
-            </div>      
-          </div>
-          <div class="col-md d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services bg-white p-3 rounded shadow-sm">
-              <div class="media-body py-md-4">
-              	<div class="d-flex align-items-center">
-	              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-diesel"></span></div>
-	              	<div class="text pl-3">
-		                <h3 class="heading mb-0">Bahan Bakar<span><?php echo $mobil['bbm']; ?></span></h3>
-	                </div>
-                </div>
-              </div>
-            </div>      
-          </div>
-      	</div>
-
-        <!-- Tombol Aksi Sewa -->
-        <div class="row my-4 justify-content-center">
-          <div class="col-md-6 text-center">
-            <a href="index.php" class="btn btn-primary btn-lg btn-block py-3">Sewa Sekarang (Book Now)</a>
-            <a href="car.php" class="btn btn-outline-secondary btn-block mt-2">Kembali ke Katalog</a>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
-  </body>
-</html>
+	              	<div class="icon d-flex align-items-center justify-content-center" style="background-color: #ffcc00 !important; color: #000 !important; width: 60px; height: 60px; border-

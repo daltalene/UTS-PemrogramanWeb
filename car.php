@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dark-theme.css">
   </head>
   <body>
     
@@ -40,7 +41,7 @@
 	  </nav>
     <!-- END nav -->
     
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_3.jpg'); background-position: center; min-height: 350px;">
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_katalog.jpg'); background-position: center; min-height: 350px;">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text align-items-end justify-content-start py-5">
@@ -66,7 +67,7 @@
 	    						<p class="price ml-auto">Rp 7.500.000 <span>/hari</span></p>
     						</div>
     						<p class="d-flex mb-0 d-block">
-                  <a href="car-single.php?id=1" class="btn btn-primary py-2 mr-1">Book now</a> 
+                  <button class="btn btn-primary py-2 mr-1 btn-book-now" data-nama="Mercedes SLK Roadster" data-harga="Rp 7.500.000 /hari">Book now</button> 
                   <a href="car-single.php?id=1" class="btn btn-secondary py-2 ml-1">Details</a>
                 </p>
     					</div>
@@ -84,7 +85,7 @@
 	    						<p class="price ml-auto">Rp 10.500.000 <span>/hari</span></p>
     						</div>
     						<p class="d-flex mb-0 d-block">
-                  <a href="car-single.php?id=2" class="btn btn-primary py-2 mr-1">Book now</a> 
+                  <button class="btn btn-primary py-2 mr-1 btn-book-now" data-nama="Range Rover Sport SUV" data-harga="Rp 10.500.000 /hari">Book now</button> 
                   <a href="car-single.php?id=2" class="btn btn-secondary py-2 ml-1">Details</a>
                 </p>
     					</div>
@@ -102,7 +103,7 @@
 	    						<p class="price ml-auto">Rp 22.500.000 <span>/hari</span></p>
     						</div>
     						<p class="d-flex mb-0 d-block">
-                  <a href="car-single.php?id=3" class="btn btn-primary py-2 mr-1">Book now</a> 
+                  <button class="btn btn-primary py-2 mr-1 btn-book-now" data-nama="McLaren 720S Supercar" data-harga="Rp 22.500.000 /hari">Book now</button> 
                   <a href="car-single.php?id=3" class="btn btn-secondary py-2 ml-1">Details</a>
                 </p>
     					</div>
@@ -120,7 +121,7 @@
 	    						<p class="price ml-auto">Rp 9.000.000 <span>/hari</span></p>
     						</div>
     						<p class="d-flex mb-0 d-block">
-                  <a href="car-single.php?id=4" class="btn btn-primary py-2 mr-1">Book now</a> 
+                  <button class="btn btn-primary py-2 mr-1 btn-book-now" data-nama="Ford Mustang GT Coupe" data-harga="Rp 9.000.000 /hari">Book now</button> 
                   <a href="car-single.php?id=4" class="btn btn-secondary py-2 ml-1">Details</a>
                 </p>
     					</div>
@@ -138,7 +139,7 @@
 	    						<p class="price ml-auto">Rp 9.750.000 <span>/hari</span></p>
     						</div>
     						<p class="d-flex mb-0 d-block">
-                  <a href="car-single.php?id=5" class="btn btn-primary py-2 mr-1">Book now</a> 
+                  <button class="btn btn-primary py-2 mr-1 btn-book-now" data-nama="BMW 3 Series Gran" data-harga="Rp 9.750.000 /hari">Book now</button> 
                   <a href="car-single.php?id=5" class="btn btn-secondary py-2 ml-1">Details</a>
                 </p>
     					</div>
@@ -156,7 +157,7 @@
 	    						<p class="price ml-auto">Rp 12.000.000 <span>/hari</span></p>
     						</div>
     						<p class="d-flex mb-0 d-block">
-                  <a href="car-single.php?id=6" class="btn btn-primary py-2 mr-1">Book now</a> 
+                  <button class="btn btn-primary py-2 mr-1 btn-book-now" data-nama="Alfa Romeo 4C Sport" data-harga="Rp 12.000.000 /hari">Book now</button> 
                   <a href="car-single.php?id=6" class="btn btn-secondary py-2 ml-1">Details</a>
                 </p>
     					</div>
@@ -174,7 +175,7 @@
 	    						<p class="price ml-auto">Rp 11.250.000 <span>/hari</span></p>
     						</div>
     						<p class="d-flex mb-0 d-block">
-                  <a href="car-single.php?id=7" class="btn btn-primary py-2 mr-1">Book now</a> 
+                  <button class="btn btn-primary py-2 mr-1 btn-book-now" data-nama="Mercedes-Benz Luxury" data-harga="Rp 11.250.000 /hari">Book now</button> 
                   <a href="car-single.php?id=7" class="btn btn-secondary py-2 ml-1">Details</a>
                 </p>
     					</div>
@@ -192,7 +193,7 @@
 	    						<p class="price ml-auto">Rp 8.250.000 <span>/hari</span></p>
     						</div>
     						<p class="d-flex mb-0 d-block">
-                  <a href="car-single.php?id=8" class="btn btn-primary py-2 mr-1">Book now</a> 
+                  <button class="btn btn-primary py-2 mr-1 btn-book-now" data-nama="Jeep Wrangler Unlimited" data-harga="Rp 8.250.000 /hari">Book now</button> 
                   <a href="car-single.php?id=8" class="btn btn-secondary py-2 ml-1">Details</a>
                 </p>
     					</div>
@@ -210,7 +211,7 @@
 	    						<p class="price ml-auto">Rp 10.500.000 <span>/hari</span></p>
     						</div>
     						<p class="d-flex mb-0 d-block">
-                  <a href="car-single.php?id=9" class="btn btn-primary py-2 mr-1">Book now</a> 
+                  <button class="btn btn-primary py-2 mr-1 btn-book-now" data-nama="Mercedes-AMG GT S" data-harga="Rp 10.500.000 /hari">Book now</button> 
                   <a href="car-single.php?id=9" class="btn btn-secondary py-2 ml-1">Details</a>
                 </p>
     					</div>
@@ -228,7 +229,7 @@
 	    						<p class="price ml-auto">Rp 14.250.000 <span>/hari</span></p>
     						</div>
     						<p class="d-flex mb-0 d-block">
-                  <a href="car-single.php?id=10" class="btn btn-primary py-2 mr-1">Book now</a> 
+                  <button class="btn btn-primary py-2 mr-1 btn-book-now" data-nama="Mercedes-AMG GT R" data-harga="Rp 14.250.000 /hari">Book now</button> 
                   <a href="car-single.php?id=10" class="btn btn-secondary py-2 ml-1">Details</a>
                 </p>
     					</div>
@@ -246,7 +247,7 @@
 	    						<p class="price ml-auto">Rp 12.750.000 <span>/hari</span></p>
     						</div>
     						<p class="d-flex mb-0 d-block">
-                  <a href="car-single.php?id=11" class="btn btn-primary py-2 mr-1">Book now</a> 
+                  <button class="btn btn-primary py-2 mr-1 btn-book-now" data-nama="Chevrolet Corvette Stingray" data-harga="Rp 12.750.000 /hari">Book now</button> 
                   <a href="car-single.php?id=11" class="btn btn-secondary py-2 ml-1">Details</a>
                 </p>
     					</div>
@@ -264,7 +265,7 @@
 	    						<p class="price ml-auto">Rp 21.000.000 <span>/hari</span></p>
     						</div>
     						<p class="d-flex mb-0 d-block">
-                  <a href="car-single.php?id=12" class="btn btn-primary py-2 mr-1">Book now</a> 
+                  <button class="btn btn-primary py-2 mr-1 btn-book-now" data-nama="Audi A1 Hatchback" data-harga="Rp 21.000.000 /hari">Book now</button> 
                   <a href="car-single.php?id=12" class="btn btn-secondary py-2 ml-1">Details</a>
                 </p>
     					</div>
@@ -275,8 +276,68 @@
     	</div>
     </section>
 
+    <!-- Modal Form Booking Interaktif -->
+    <div class="modal fade" id="modalBooking" tabindex="-1" role="dialog" aria-labelledby="modalBookingLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title font-weight-bold" id="modalBookingLabel">Formulir Sewa Mobil</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form action="#" method="POST" onsubmit="alert('Terima kasih! Pemesanan Anda berhasil diproses.'); $('#modalBooking').modal('hide'); return false;">
+            <div class="modal-body">
+              <div class="form-group">
+                <label class="font-weight-bold">Mobil Yang Dipilih</label>
+                <input type="text" id="bookingNamaMobil" class="form-control" readonly>
+              </div>
+              <div class="form-group">
+                <label class="font-weight-bold">Tarif Sewa</label>
+                <input type="text" id="bookingHargaMobil" class="form-control" readonly>
+              </div>
+              <div class="form-group">
+                <label class="font-weight-bold">Nama Lengkap Pemesan</label>
+                <input type="text" class="form-control" placeholder="Masukkan nama Anda" required>
+              </div>
+              <div class="form-group">
+                <label class="font-weight-bold">Nomor WhatsApp / HP</label>
+                <input type="tel" class="form-control" placeholder="08xxxxxxxxxx" required>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label class="font-weight-bold">Tanggal Sewa</label>
+                  <input type="date" class="form-control" required>
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="font-weight-bold">Lama Sewa (Hari)</label>
+                  <input type="number" class="form-control" min="1" value="1" required>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+              <button type="submit" class="btn btn-primary font-weight-bold">Konfirmasi Pemesanan</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
+    
+    <script>
+      $(document).ready(function() {
+        $('.btn-book-now').on('click', function() {
+          var nama = $(this).data('nama');
+          var harga = $(this).data('harga');
+          $('#bookingNamaMobil').val(nama);
+          $('#bookingHargaMobil').val(harga);
+          $('#modalBooking').modal('show');
+        });
+      });
+    </script>
   </body>
 </html>
