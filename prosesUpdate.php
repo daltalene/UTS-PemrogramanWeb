@@ -11,11 +11,11 @@ $foto = $_FILES['foto']['name'];
 $tmp  = $_FILES['foto']['tmp_name'];
 
 if ($foto != "") {
-    // Jika gambar ikut diganti
+//ini kalau gambar diganti biar langsung dipindahin ke folder images
     move_uploaded_file($tmp, "images/" . $foto);
     mysqli_query($koneksi, "UPDATE table_mobil SET nama_mobil='$nama_mobil', merk='$merek', harga_sewa='$harga', gambar='$foto' WHERE id_mobil='$id'");
 } else {
-    // Jika gambar tidak diganti
+//ini kalau gambar tidak diganti
     mysqli_query($koneksi, "UPDATE table_mobil SET nama_mobil='$nama_mobil', merk='$merek', harga_sewa='$harga' WHERE id_mobil='$id'");
 }
 

@@ -9,10 +9,9 @@ $harga      = $_POST['harga'];
 $foto = $_FILES['foto']['name'];
 $tmp  = $_FILES['foto']['tmp_name'];
 
-// Simpan gambar ke folder images/
+//ini buat nyimpen gambar ke folder images
 move_uploaded_file($tmp, "images/" . $foto);
 
-// Query SQL Tambah (Create)
 mysqli_query($koneksi, "INSERT INTO table_mobil VALUES('', '$nama_mobil', '$merek', '$harga', '$foto')");
 
 header("location:admin.php");

@@ -13,7 +13,6 @@ if ($level == 'admin') {
         header("location:admin.php");
         exit();
     } else {
-        // Balik ke login admin dengan parameter pesan=gagal
         header("location:login_admin.php?pesan=gagal");
         exit();
     }
@@ -24,7 +23,6 @@ if ($level == 'admin') {
         header("location:car.php");
         exit();
     } else {
-        // Balik ke login user dengan parameter pesan=gagal
         header("location:login.php?pesan=gagal");
         exit();
     }

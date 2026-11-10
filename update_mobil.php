@@ -25,7 +25,6 @@ $baris = mysqli_fetch_assoc($query);
   </head>
   <body class="bg-light">
     
-    <!-- Navbar Biru -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary ftco-navbar-light awake" id="ftco-navbar" style="background: #1089ff !important; top: 0; position: relative;">
       <div class="container">
         <a class="navbar-brand text-white" href="index.php">Car<span style="color: #01d28e;">Book Admin</span></a>

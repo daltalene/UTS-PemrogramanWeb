@@ -6,7 +6,7 @@ $nama_lengkap = trim($_POST['nama_lengkap']);
 $username     = trim($_POST['username']);
 $password     = $_POST['password'];
 
-// 1. Validasi Username (Min 5 karakter, hanya huruf & angka, tanpa spasi/simbol)
+//validasi username supaya sesuai dgn ketentuan
 if (!preg_match('/^[a-zA-Z0-9]{5,}$/', $username)) {
     echo "<script>
             alert('Username Minimal 5 karakter. Hanya boleh huruf dan angka, tanpa spasi atau karakter khusus.');
@@ -15,7 +15,7 @@ if (!preg_match('/^[a-zA-Z0-9]{5,}$/', $username)) {
     exit();
 }
 
-// 2. Validasi Password (Minimal 8 karakter)
+//alidasi password agar minimalnya 8 karakter
 if (strlen($password) < 8) {
     echo "<script>
             alert('Password Minimal 8 karakter.');
@@ -24,7 +24,7 @@ if (strlen($password) < 8) {
     exit();
 }
 
-// 3. Cek apakah username sudah pernah terdaftar di database
+//cek apakah username sudah ada di database atau belum
 $cek_user = mysqli_query($koneksi, "SELECT * FROM table_user WHERE username='$username'");
 if (mysqli_num_rows($cek_user) > 0) {
     echo "<script>
@@ -34,7 +34,7 @@ if (mysqli_num_rows($cek_user) > 0) {
     exit();
 }
 
-// 4. Simpan ke database jika semua validasi lolos
+//menyimpan data ke dalam database jika berhasil registrasi
 $query = mysqli_query($koneksi, "INSERT INTO table_user VALUES('', '$username', '$password', '$nama_lengkap')");
 
 if ($query) {
