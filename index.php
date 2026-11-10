@@ -49,7 +49,6 @@ include 'koneksi.php';
               <li class="nav-item"><a href="logout.php" class="nav-link font-weight-bold" onclick="return confirm('Yakin ingin logout?')">Logout</a></li>
 
             <?php } else { ?>
-              <li class="nav-item"><a href="register.php" class="nav-link">Register</a></li>
               <li class="nav-item"><a href="login.php" class="nav-link">Login</a></li>
               <li class="nav-item"><a href="login_admin.php" class="nav-link">Login Admin</a></li>
             <?php } ?>
