@@ -15,6 +15,12 @@ if (!$mobil) {
 $harga_hari   = $mobil['harga_sewa'];
 $harga_jam    = $harga_hari * 0.10;
 $harga_minggu = $harga_hari * 6;
+
+// Menentukan Spesifikasi Mobil Dinamis
+$jarak_tempuh = isset($mobil['jarak_tempuh']) && !empty($mobil['jarak_tempuh']) ? $mobil['jarak_tempuh'] : (10000 + ($mobil['id_mobil'] * 2500)) . " KM";
+$transmisi    = isset($mobil['transmisi']) && !empty($mobil['transmisi']) ? $mobil['transmisi'] : ($mobil['id_mobil'] % 2 == 0 ? "Automatic Tiptronic" : "Manual 6-Speed");
+$kursi        = isset($mobil['kapasitas']) && !empty($mobil['kapasitas']) ? $mobil['kapasitas'] : (strpos(strtolower($mobil['nama_mobil']), 'suv') !== false ? "7 Kursi" : "2 Kursi Sport");
+$bbm          = isset($mobil['bahan_bakar']) && !empty($mobil['bahan_bakar']) ? $mobil['bahan_bakar'] : (strpos(strtolower($mobil['nama_mobil']), 'supercar') !== false || strpos(strtolower($mobil['nama_mobil']), 'gt') !== false ? "Pertamax Turbo" : "Bensin Premium");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,6 +91,7 @@ $harga_minggu = $harga_hari * 6;
       		</div>
       	</div>
 
+        <!-- Rincian Harga Sewa Dinamis -->
         <div class="row my-4">
           <div class="col-md-4 text-center mb-3 mb-md-0">
             <div class="p-4 rounded shadow-sm border" style="background-color: #1a1a1a; border-color: #333 !important;">
@@ -106,14 +113,15 @@ $harga_minggu = $harga_hari * 6;
           </div>
         </div>
 
+        <!-- Spesifikasi Mobil Dinamis -->
       	<div class="row my-4">
       		<div class="col-md d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services p-3 rounded shadow-sm w-100" style="background-color: #1a1a1a; border: 1px solid #333;">
               <div class="media-body py-md-4">
               	<div class="d-flex align-items-center">
-	              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-dashboard"></span></div>
+	              	<div class="icon d-flex align-items-center justify-content-center" style="background-color: #ffcc00 !important; color: #000 !important; width: 60px; height: 60px; border-radius: 50%;"><span class="flaticon-dashboard"></span></div>
 	              	<div class="text pl-3">
-		                <h3 class="heading mb-0">Jarak Tempuh<span>20,000 KM</span></h3>
+		                <h3 class="heading mb-0 text-white">Jarak Tempuh<span class="d-block text-muted" style="font-size: 14px;"><?php echo $jarak_tempuh; ?></span></h3>
 	                </div>
                 </div>
               </div>
@@ -123,9 +131,9 @@ $harga_minggu = $harga_hari * 6;
             <div class="media block-6 services p-3 rounded shadow-sm w-100" style="background-color: #1a1a1a; border: 1px solid #333;">
               <div class="media-body py-md-4">
               	<div class="d-flex align-items-center">
-	              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-pistons"></span></div>
+	              	<div class="icon d-flex align-items-center justify-content-center" style="background-color: #ffcc00 !important; color: #000 !important; width: 60px; height: 60px; border-radius: 50%;"><span class="flaticon-pistons"></span></div>
 	              	<div class="text pl-3">
-		                <h3 class="heading mb-0">Transmisi<span>Automatic</span></h3>
+		                <h3 class="heading mb-0 text-white">Transmisi<span class="d-block text-muted" style="font-size: 14px;"><?php echo $transmisi; ?></span></h3>
 	                </div>
                 </div>
               </div>
@@ -135,9 +143,9 @@ $harga_minggu = $harga_hari * 6;
             <div class="media block-6 services p-3 rounded shadow-sm w-100" style="background-color: #1a1a1a; border: 1px solid #333;">
               <div class="media-body py-md-4">
               	<div class="d-flex align-items-center">
-	              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-car-seat"></span></div>
+	              	<div class="icon d-flex align-items-center justify-content-center" style="background-color: #ffcc00 !important; color: #000 !important; width: 60px; height: 60px; border-radius: 50%;"><span class="flaticon-car-seat"></span></div>
 	              	<div class="text pl-3">
-		                <h3 class="heading mb-0">Kapasitas<span>5 Kursi</span></h3>
+		                <h3 class="heading mb-0 text-white">Kapasitas<span class="d-block text-muted" style="font-size: 14px;"><?php echo $kursi; ?></span></h3>
 	                </div>
                 </div>
               </div>
@@ -147,9 +155,9 @@ $harga_minggu = $harga_hari * 6;
             <div class="media block-6 services p-3 rounded shadow-sm w-100" style="background-color: #1a1a1a; border: 1px solid #333;">
               <div class="media-body py-md-4">
               	<div class="d-flex align-items-center">
-	              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-diesel"></span></div>
+	              	<div class="icon d-flex align-items-center justify-content-center" style="background-color: #ffcc00 !important; color: #000 !important; width: 60px; height: 60px; border-radius: 50%;"><span class="flaticon-diesel"></span></div>
 	              	<div class="text pl-3">
-		                <h3 class="heading mb-0">Bahan Bakar<span>Bensin</span></h3>
+		                <h3 class="heading mb-0 text-white">Bahan Bakar<span class="d-block text-muted" style="font-size: 14px;"><?php echo $bbm; ?></span></h3>
 	                </div>
                 </div>
               </div>
@@ -157,18 +165,79 @@ $harga_minggu = $harga_hari * 6;
           </div>
       	</div>
 
+        <!-- Tombol Aksi Sewa -->
         <div class="row my-4 justify-content-center">
           <div class="col-md-6 text-center">
-            <a href="index.php" class="btn btn-primary btn-lg btn-block py-3 font-weight-bold">Sewa Sekarang (Book Now)</a>
-            <a href="car.php" class="btn btn-outline-secondary btn-block mt-2">Kembali ke Katalog</a>
+            <button class="btn btn-primary btn-lg btn-block py-3 font-weight-bold btn-book-now" data-nama="<?php echo htmlspecialchars($mobil['nama_mobil']); ?>" data-harga="Rp <?php echo number_format($harga_hari, 0, ',', '.'); ?> / Hari">Sewa Sekarang (Book Now)</button>
+            <a href="car.php" class="btn btn-secondary btn-block mt-2 py-2">Kembali ke Katalog</a>
           </div>
         </div>
 
       </div>
     </section>
 
+    <!-- Modal Form Booking Interaktif -->
+    <div class="modal fade" id="modalBooking" tabindex="-1" role="dialog" aria-labelledby="modalBookingLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title font-weight-bold" id="modalBookingLabel">Formulir Sewa Mobil</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form action="#" method="POST" onsubmit="alert('Terima kasih! Pemesanan Anda berhasil diproses.'); $('#modalBooking').modal('hide'); return false;">
+            <div class="modal-body">
+              <div class="form-group text-left">
+                <label class="font-weight-bold">Mobil Yang Dipilih</label>
+                <input type="text" id="bookingNamaMobil" class="form-control" readonly>
+              </div>
+              <div class="form-group text-left">
+                <label class="font-weight-bold">Tarif Sewa</label>
+                <input type="text" id="bookingHargaMobil" class="form-control" readonly>
+              </div>
+              <div class="form-group text-left">
+                <label class="font-weight-bold">Nama Lengkap Pemesan</label>
+                <input type="text" class="form-control" placeholder="Masukkan nama Anda" required>
+              </div>
+              <div class="form-group text-left">
+                <label class="font-weight-bold">Nomor WhatsApp / HP</label>
+                <input type="tel" class="form-control" placeholder="08xxxxxxxxxx" required>
+              </div>
+              <div class="form-row text-left">
+                <div class="form-group col-md-6">
+                  <label class="font-weight-bold">Tanggal Sewa</label>
+                  <input type="date" class="form-control" required>
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="font-weight-bold">Lama Sewa (Hari)</label>
+                  <input type="number" class="form-control" min="1" value="1" required>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+              <button type="submit" class="btn btn-primary font-weight-bold">Konfirmasi Pemesanan</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
+
+    <script>
+      $(document).ready(function() {
+        $('.btn-book-now').on('click', function() {
+          var nama = $(this).data('nama');
+          var harga = $(this).data('harga');
+          $('#bookingNamaMobil').val(nama);
+          $('#bookingHargaMobil').val(harga);
+          $('#modalBooking').modal('show');
+        });
+      });
+    </script>
   </body>
 </html>

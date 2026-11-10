@@ -77,6 +77,7 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
           
           <?php 
           while ($baris = mysqli_fetch_assoc($hasil)) { 
+            $formatted_price = "Rp " . number_format($baris['harga_sewa'], 0, ',', '.') . " /hari";
           ?>
     			<div class="col-md-4 mb-4">
     				<div class="car-wrap rounded">
@@ -88,7 +89,7 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
 	    						<p class="price ml-auto">Rp <?php echo number_format($baris['harga_sewa'], 0, ',', '.'); ?> <span>/hari</span></p>
     						</div>
     						<p class="d-flex mb-0 d-block">
-                  <a href="car-single.php?id=<?php echo $baris['id_mobil']; ?>" class="btn btn-primary py-2 mr-1">Book now</a> 
+                  <button class="btn btn-primary py-2 mr-1 btn-book-now" data-nama="<?php echo htmlspecialchars($baris['nama_mobil']); ?>" data-harga="<?php echo $formatted_price; ?>">Book now</button> 
                   <a href="car-single.php?id=<?php echo $baris['id_mobil']; ?>" class="btn btn-secondary py-2 ml-1">Details</a>
                 </p>
     					</div>
@@ -100,8 +101,66 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
     	</div>
     </section>
 
+    <!-- Modal Form Booking Interaktif -->
+    <div class="modal fade" id="modalBooking" tabindex="-1" role="dialog" aria-labelledby="modalBookingLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title font-weight-bold" id="modalBookingLabel">Formulir Sewa Mobil</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form action="#" method="POST" onsubmit="alert('Terima kasih! Pemesanan Anda berhasil diproses.'); $('#modalBooking').modal('hide'); return false;">
+            <div class="modal-body">
+              <div class="form-group text-left">
+                <label class="font-weight-bold">Mobil Yang Dipilih</label>
+                <input type="text" id="bookingNamaMobil" class="form-control" readonly>
+              </div>
+              <div class="form-group text-left">
+                <label class="font-weight-bold">Tarif Sewa</label>
+                <input type="text" id="bookingHargaMobil" class="form-control" readonly>
+              </div>
+              <div class="form-group text-left">
+                <label class="font-weight-bold">Nama Lengkap Pemesan</label>
+                <input type="text" class="form-control" placeholder="Masukkan nama Anda" required>
+              </div>
+              <div class="form-group text-left">
+                <label class="font-weight-bold">Nomor WhatsApp / HP</label>
+                <input type="tel" class="form-control" placeholder="08xxxxxxxxxx" required>
+              </div>
+              <div class="form-row text-left">
+                <div class="form-group col-md-6">
+                  <label class="font-weight-bold">Tanggal Sewa</label>
+                  <input type="date" class="form-control" required>
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="font-weight-bold">Lama Sewa (Hari)</label>
+                  <input type="number" class="form-control" min="1" value="1" required>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+              <button type="submit" class="btn btn-primary font-weight-bold">Konfirmasi Pemesanan</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
+
+    <script>
+      $(document).ready(function() {$('.btn-book-now').on('click', function() {
+          var nama = $(this).data('nama');
+          var harga = $(this).data('harga');$('#bookingNamaMobil').val(nama);
+          $('#bookingHargaMobil').val(harga);
+          $('#modalBooking').modal('show');
+        });
+      });
+    </script>
   </body>
 </html>
