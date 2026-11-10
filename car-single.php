@@ -2,20 +2,16 @@
 session_start();
 include 'koneksi.php';
 
-// Tangkap ID dari URL (contoh: car-single.php?id=1)
 $id = isset($_GET['id']) ? $_GET['id'] : '';
 
-// Ambil data mobil spesifik dari database
 $query = mysqli_query($koneksi, "SELECT * FROM table_mobil WHERE id_mobil='$id'");
 $mobil = mysqli_fetch_assoc($query);
 
-// Jika ID tidak ada di database, kembalikan ke halaman katalog
 if (!$mobil) {
     header("location:car.php");
     exit();
 }
 
-// Hitung estimasi harga jam (10% dari sewa hari) dan minggu (6x sewa hari)
 $harga_hari   = $mobil['harga_sewa'];
 $harga_jam    = $harga_hari * 0.10;
 $harga_minggu = $harga_hari * 6;
@@ -44,7 +40,6 @@ $harga_minggu = $harga_hari * 6;
   </head>
   <body>
     
-    <!-- Navbar Dark Theme Multi-Level -->
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
       <div class="container">
         <a class="navbar-brand" href="index.php">Car<span>Book</span></a>
@@ -90,7 +85,6 @@ $harga_minggu = $harga_hari * 6;
       		</div>
       	</div>
 
-        <!-- Rincian Harga Sewa Dinamis (Dark Theme) -->
         <div class="row my-4">
           <div class="col-md-4 text-center mb-3 mb-md-0">
             <div class="p-4 rounded shadow-sm border" style="background-color: #1a1a1a; border-color: #333 !important;">
@@ -112,7 +106,6 @@ $harga_minggu = $harga_hari * 6;
           </div>
         </div>
 
-        <!-- Spesifikasi bawaan UI template Carbook (Dark Theme) -->
       	<div class="row my-4">
       		<div class="col-md d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services p-3 rounded shadow-sm w-100" style="background-color: #1a1a1a; border: 1px solid #333;">
@@ -164,7 +157,6 @@ $harga_minggu = $harga_hari * 6;
           </div>
       	</div>
 
-        <!-- Tombol Aksi Sewa -->
         <div class="row my-4 justify-content-center">
           <div class="col-md-6 text-center">
             <a href="index.php" class="btn btn-primary btn-lg btn-block py-3 font-weight-bold">Sewa Sekarang (Book Now)</a>

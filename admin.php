@@ -2,13 +2,11 @@
 session_start();
 include 'koneksi.php';
 
-// Proteksi Halaman Admin
 if (!isset($_SESSION['admin'])) {
     header("location:login_admin.php");
     exit();
 }
 
-// Ambil data mobil dari database
 $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DESC");
 ?>
 <!DOCTYPE html>
@@ -25,13 +23,11 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
     <link rel="stylesheet" href="css/dark-theme.css">
     
     <style>
-      /* Jarak aman di bawah Navbar fixed */
       .main-admin-content {
         padding-top: 120px !important;
         padding-bottom: 60px !important;
       }
 
-      /* Style tombol Tambah Mobil Hijau Menyala */
       .btn-tambah-mobil {
         background-color: #01d28e !important;
         color: #ffffff !important;
@@ -48,7 +44,6 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
         color: #ffffff !important;
       }
 
-      /* Styling modal agar pas di Dark Theme */
       .modal-content {
         background-color: #1a1a1a !important;
         color: #ffffff !important;
@@ -69,7 +64,6 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
   </head>
   <body>
 
-    <!-- Navbar Dark Theme -->
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
       <div class="container">
         <a class="navbar-brand" href="index.php">Car<span>Book Admin</span></a>
@@ -92,12 +86,9 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
         </div>
       </div>
     </nav>
-    <!-- END navbar -->
 
-    <!-- Main Content Area dengan Spacing Aman -->
     <div class="container main-admin-content">
       
-      <!-- Header Judul + Tombol Tambah (Di Atas Tabel) -->
       <div class="d-flex justify-content-between align-items-center mb-4 p-3 rounded" style="background-color: #1a1a1a; border: 1px solid #333;">
         <h3 class="font-weight-bold text-white mb-0">Kelola Data Mobil</h3>
         <button type="button" class="btn btn-tambah-mobil" data-toggle="modal" data-target="#modalTambah">
@@ -146,7 +137,6 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
 
     </div>
 
-    <!-- Modal Form Tambah Mobil -->
     <div class="modal fade" id="modalTambah" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">

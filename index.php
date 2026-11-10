@@ -26,7 +26,6 @@ include 'koneksi.php';
   </head>
   <body>
 
-    <!-- Navbar Dark Theme Multi-Level -->
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
       <div class="container">
         <a class="navbar-brand" href="index.php">Car<span>Book</span></a>
@@ -57,7 +56,6 @@ include 'koneksi.php';
         </div>
       </div>
     </nav>
-    <!-- END navbar -->
     
     <div class="hero-wrap ftco-degree-bg" style="background-image: url('images/bg_home.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>

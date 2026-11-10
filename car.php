@@ -2,7 +2,6 @@
 session_start();
 include 'koneksi.php';
 
-// Ambil semua data mobil dari database
 $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DESC");
 ?>
 <!DOCTYPE html>
@@ -29,7 +28,6 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
   </head>
   <body>
     
-    <!-- Navbar Dark Theme Multi-Level -->
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
       <div class="container">
         <a class="navbar-brand" href="index.php">Car<span>Book</span></a>
@@ -78,7 +76,6 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
     		<div class="row">
           
           <?php 
-          // Perulangan while untuk menampilkan data mobil dinamis dari database
           while ($baris = mysqli_fetch_assoc($hasil)) { 
           ?>
     			<div class="col-md-4 mb-4">
