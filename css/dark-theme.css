@@ -1,0 +1,301 @@
+body,
+.bg-light,
+.hero-wrap,
+.hero-wrap.hero-wrap-2 {
+    background-color: #121212 !important;
+    color: #ffffff !important;
+}
+
+.hero-wrap .overlay {
+    background: #000000 !important;
+    opacity: 0.7 !important;
+}
+
+.ftco-section,
+.services-2,
+.car-wrap,
+.table-responsive,
+.modal-content,
+.contact-form,
+.media.block-6 {
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
+    border-color: #333333 !important;
+}
+
+.services-2 .heading,
+.car-wrap .text h2 a,
+.heading-section h2,
+.modal-title,
+.table,
+.text-dark {
+    color: #ffffff !important;
+}
+
+.ftco-navbar-light,
+#ftco-navbar {
+    background: #121212 !important;
+}
+
+#ftco-nav .navbar-nav .nav-item .nav-link,
+#ftco-nav .navbar-nav .nav-item .nav-link.text-white {
+    color: #ffffff !important;
+    opacity: 1 !important;
+}
+
+#ftco-nav .navbar-nav .nav-item .nav-link:hover {
+    color: #ffcc00 !important;
+}
+
+#ftco-nav .navbar-nav .nav-item.active .nav-link {
+    color: #e50914 !important;
+    font-weight: bold;
+}
+
+.navbar-brand,
+.navbar-brand span {
+    color: #ffffff !important;
+}
+
+.btn.btn-primary,
+button.btn-primary,
+a.btn-primary,
+input[type="submit"].btn-primary {
+    background-color: #e50914 !important;
+    border-color: #e50914 !important;
+    color: #ffffff !important;
+}
+
+.btn.btn-primary:hover,
+button.btn-primary:hover,
+a.btn-primary:hover,
+input[type="submit"].btn-primary:hover {
+    background-color: #b80710 !important;
+    border-color: #b80710 !important;
+}
+
+.btn-secondary,
+.btn-outline-secondary {
+    background-color: #333333 !important;
+    border-color: #444444 !important;
+    color: #ffffff !important;
+}
+
+.btn-secondary:hover,
+.btn-outline-secondary:hover {
+    background-color: #ffcc00 !important;
+    color: #000000 !important;
+}
+
+#ftco-navbar,
+.ftco-navbar-light {
+    background: #121212 !important;
+}
+
+#ftco-nav .navbar-nav .nav-item.active .nav-link {
+    color: #e50914 !important;
+    font-weight: bold;
+}
+
+.car-wrap {
+    background-color: #1a1a1a !important;
+    border: 1px solid #2a2a2a !important;
+    border-radius: 8px !important;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.car-wrap:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(229, 9, 20, 0.15) !important;
+}
+
+.car-wrap .text h2 a {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.5px;
+}
+
+.car-wrap .text h2 a:hover {
+    color: #ffcc00 !important;
+}
+
+.car-wrap .cat {
+    color: #aaaaaa !important;
+    font-size: 13px !important;
+}
+
+.car-wrap .price {
+    color: #e50914 !important; 
+    font-weight: bold !important;
+    font-size: 18px !important;
+}
+
+.car-wrap .price span {
+    color: #888888 !important;
+    font-size: 12px !important;
+}
+
+.car-wrap .btn-primary {
+    background-color: #e50914 !important;
+    border-color: #e50914 !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    border-radius: 4px !important;
+}
+
+.car-wrap .btn-primary:hover {
+    background-color: #b80710 !important;
+    border-color: #b80710 !important;
+}
+
+.car-wrap .btn-secondary {
+    background-color: transparent !important;
+    border: 1px solid #444444 !important;
+    color: #cccccc !important;
+    font-weight: 500 !important;
+    border-radius: 4px !important;
+    transition: all 0.3s ease !important;
+}
+
+.car-wrap .btn-secondary:hover {
+    background-color: #ffcc00 !important; /* Warna Emas */
+    border-color: #ffcc00 !important;
+    color: #000000 !important; /* Teks Hitam saat hover agar terbaca */
+    font-weight: 600 !important;
+}
+
+.table-responsive {
+    background-color: #1a1a1a !important;
+    border: 1px solid #2d2d2d !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+    padding: 1.5rem !important;
+}
+
+.table {
+    color: #e0e0e0 !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.table-bordered, 
+.table-bordered td, 
+.table-bordered th {
+    border: none !important;
+}
+
+.table thead.thead-dark th {
+    background-color: #242424 !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+    padding: 16px !important;
+    border-bottom: 2px solid #e50914 !important; 
+}
+
+.table thead.thead-dark th:first-child {
+    border-top-left-radius: 8px;
+}
+.table thead.thead-dark th:last-child {
+    border-top-right-radius: 8px;
+}
+
+.table tbody tr {
+    transition: background-color 0.2s ease;
+    border-bottom: 1px solid #2a2a2a !important; 
+}
+
+.table tbody tr:hover {
+    background-color: #242424 !important; 
+}
+
+.table tbody td {
+    padding: 16px !important;
+    vertical-align: middle !important;
+    color: #cccccc !important;
+    font-size: 14px;
+}
+
+.table tbody img {
+    border-radius: 8px !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    object-fit: cover;
+}
+
+.table .btn-sm {
+    padding: 6px 14px !important;
+    font-size: 12px !important;
+    border-radius: 20px !important; 
+    font-weight: 600 !important;
+    letter-spacing: 0.5px;
+    border: none !important;
+    transition: all 0.3s ease !important;
+}
+
+.table .btn-warning {
+    background-color: #ffb703 !important;
+    color: #000000 !important;
+}
+.table .btn-warning:hover {
+    background-color: #ff9e00 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255, 183, 3, 0.3);
+}
+
+.table .btn-danger {
+    background-color: #e50914 !important;
+    color: #ffffff !important;
+}
+.table .btn-danger:hover {
+    background-color: #b80710 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(229, 9, 20, 0.3);
+}
+
+.modal-content {
+    background-color: #1a1a1a !important;
+    border: 1px solid #333333 !important;
+    border-radius: 12px !important;
+    color: #ffffff !important;
+}
+
+.modal-header, 
+.modal-footer {
+    border-color: #2d2d2d !important;
+}
+
+.modal-title {
+    color: #ffffff !important;
+}
+
+.modal-content .form-control {
+    background-color: #242424 !important;
+    border: 1px solid #3d3d3d !important;
+    color: #ffffff !important;
+    border-radius: 6px !important;
+}
+
+.modal-content .form-control:focus {
+    border-color: #e50914 !important;
+    box-shadow: 0 0 0 0.2rem rgba(229, 9, 20, 0.25) !important;
+}
+
+.modal-content label {
+    color: #dddddd !important;
+}
+
+.services-2 .icon {
+    background-color: #e50914 !important; 
+    color: #000000 !important;            
+}
+
+.heading-section .subheading {
+    color: #e50914 !important; 
+    font-weight: 700 !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+}
