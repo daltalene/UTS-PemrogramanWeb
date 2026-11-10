@@ -62,7 +62,7 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
       </div>
     </nav>
     
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_3.jpg'); background-position: center; min-height: 350px;">
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_katalog.jpg'); background-position: center; min-height: 350px;">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text align-items-end justify-content-start py-5">
