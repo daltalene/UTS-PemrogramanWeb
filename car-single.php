@@ -19,9 +19,6 @@ if (!$mobil) {
 $harga_hari   = $mobil['harga_sewa'];
 $harga_jam    = $harga_hari * 0.10;
 $harga_minggu = $harga_hari * 6;
-// Tangkap ID dari URL, jika tidak ada default ke 1
-$id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
-$mobil = isset($cars[$id]) ?$cars[$id] :$cars[1];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,96 +44,76 @@ $mobil = isset($cars[$id]) ?$cars[$id] :$cars[1];
   </head>
   <body>
     
-<!-- Navbar Dinamis Multi-Level (Admin & User) -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary ftco-navbar-light awake" id="ftco-navbar" style="background: #1089ff !important; top: 0; position: relative;">
+    <!-- Navbar Dark Theme Multi-Level -->
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
       <div class="container">
-        <a class="navbar-brand text-white" href="index.php">Car<span style="color: #01d28e;">Book</span></a>
+        <a class="navbar-brand" href="index.php">Car<span>Book</span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="oi oi-menu"></span> Menu
         </button>
 
         <div class="collapse navbar-collapse" id="ftco-nav">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a href="index.php" class="nav-link text-white">Home</a></li>
-            <li class="nav-item"><a href="car.php" style="color: #01d28e !important;" class="nav-link text-white">Katalog</a></li>
+            <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
+            <li class="nav-item active"><a href="car.php" class="nav-link">Katalog</a></li>
 
             <?php if (isset($_SESSION['admin'])) { ?>
-              <li class="nav-item"><a href="admin.php" class="nav-link text-white">Dashboard Admin</a></li>
+              <li class="nav-item"><a href="admin.php" class="nav-link">Dashboard Admin</a></li>
               <li class="nav-item"><a href="#" class="nav-link">Halo, <?php echo $_SESSION['admin']; ?></a></li>
-              <li class="nav-item"><a href="logout.php" class="nav-link text-white font-weight-bold" onclick="return confirm('Yakin ingin logout?')">Logout</a></li>
+              <li class="nav-item"><a href="logout.php" class="nav-link font-weight-bold" onclick="return confirm('Yakin ingin logout?')">Logout</a></li>
 
             <?php } elseif (isset($_SESSION['user'])) { ?>
               <li class="nav-item"><a href="#" class="nav-link">Halo, <?php echo $_SESSION['user']; ?></a></li>
-              <li class="nav-item"><a href="logout.php" class="nav-link text-white font-weight-bold" onclick="return confirm('Yakin ingin logout?')">Logout</a></li>
+              <li class="nav-item"><a href="logout.php" class="nav-link font-weight-bold" onclick="return confirm('Yakin ingin logout?')">Logout</a></li>
 
             <?php } else { ?>
-              <li class="nav-item"><a href="login.php" class="nav-link text-white">Login</a></li>
-              <li class="nav-item"><a href="login_admin.php" class="nav-link text-white">Login Admin</a></li>
+              <li class="nav-item"><a href="register.php" class="nav-link">Register</a></li>
+              <li class="nav-item"><a href="login.php" class="nav-link">Login</a></li>
+              <li class="nav-item"><a href="login_admin.php" class="nav-link">Login Admin</a></li>
             <?php } ?>
 
           </ul>
         </div>
       </div>
     </nav>
-    <!-- END navbar -->
 
-    <section class="ftco-section ftco-car-details bg-light pt-5">
+    <section class="ftco-section ftco-car-details pt-5">
       <div class="container">
       	<div class="row justify-content-center">
       		<div class="col-md-12">
       			<div class="car-details">
       				<div class="img rounded" style="background-image: url(images/<?php echo $mobil['gambar']; ?>); height: 400px; background-size: cover; background-position: center;"></div>
       				<div class="text text-center mt-4">
-      					<span class="subheading"><?php echo $mobil['merk']; ?></span>
-      					<h2><?php echo $mobil['nama_mobil']; ?></h2>
-      					<span class="subheading" style="color: #e50914 !important; font-weight: 700; text-transform: uppercase;"><?php echo $mobil['merek']; ?></span>
-      					<h2 class="text-white font-weight-bold"><?php echo $mobil['nama']; ?></h2>
+      					<span class="subheading" style="color: #e50914 !important; font-weight: 700; text-transform: uppercase;"><?php echo $mobil['merk']; ?></span>
+      					<h2 class="text-white font-weight-bold"><?php echo $mobil['nama_mobil']; ?></h2>
       				</div>
       			</div>
       		</div>
       	</div>
 
-        <!-- Rincian Harga Sewa Dinamis dari Database -->
-        <div class="row my-4">
-          <div class="col-md-4 text-center mb-3">
-            <div class="bg-white p-4 rounded shadow-sm">
-              <h5 class="text-muted">Sewa Per Jam</h5>
-              <h3 class="text-primary font-weight-bold">Rp <?php echo number_format($harga_jam, 0, ',', '.'); ?> / Jam</h3>
-            </div>
-          </div>
-          <div class="col-md-4 text-center mb-3">
-            <div class="bg-white p-4 rounded shadow-sm border border-primary">
-              <h5 class="text-muted">Sewa Per Hari</h5>
-              <h3 class="text-primary font-weight-bold">Rp <?php echo number_format($harga_hari, 0, ',', '.'); ?> / Hari</h3>
-            </div>
-          </div>
-          <div class="col-md-4 text-center mb-3">
-            <div class="bg-white p-4 rounded shadow-sm">
-              <h5 class="text-muted">Sewa Per Minggu</h5>
-              <h3 class="text-primary font-weight-bold">Rp <?php echo number_format($harga_minggu, 0, ',', '.'); ?> / Minggu</h3>
         <!-- Rincian Harga Sewa Dinamis (Dark Theme) -->
         <div class="row my-4">
           <div class="col-md-4 text-center mb-3 mb-md-0">
             <div class="p-4 rounded shadow-sm border" style="background-color: #1a1a1a; border-color: #333 !important;">
               <h5 class="text-muted">Sewa Per Jam</h5>
-              <h3 class="font-weight-bold" style="color: #e50914;">Rp <?php echo number_format($mobil['jam'], 0, ',', '.'); ?> <span style="font-size: 14px; color: #888;">/ Jam</span></h3>
+              <h3 class="font-weight-bold" style="color: #e50914;">Rp <?php echo number_format($harga_jam, 0, ',', '.'); ?> <span style="font-size: 14px; color: #888;">/ Jam</span></h3>
             </div>
           </div>
           <div class="col-md-4 text-center mb-3 mb-md-0">
             <div class="p-4 rounded shadow-sm border" style="background-color: #1a1a1a; border-color: #e50914 !important;">
               <h5 class="text-muted">Sewa Per Hari</h5>
-              <h3 class="font-weight-bold" style="color: #e50914;">Rp <?php echo number_format($mobil['hari'], 0, ',', '.'); ?> <span style="font-size: 14px; color: #888;">/ Hari</span></h3>
+              <h3 class="font-weight-bold" style="color: #e50914;">Rp <?php echo number_format($harga_hari, 0, ',', '.'); ?> <span style="font-size: 14px; color: #888;">/ Hari</span></h3>
             </div>
           </div>
           <div class="col-md-4 text-center">
             <div class="p-4 rounded shadow-sm border" style="background-color: #1a1a1a; border-color: #333 !important;">
               <h5 class="text-muted">Sewa Per Minggu</h5>
-              <h3 class="font-weight-bold" style="color: #e50914;">Rp <?php echo number_format($mobil['minggu'], 0, ',', '.'); ?> <span style="font-size: 14px; color: #888;">/ Minggu</span></h3>
+              <h3 class="font-weight-bold" style="color: #e50914;">Rp <?php echo number_format($harga_minggu, 0, ',', '.'); ?> <span style="font-size: 14px; color: #888;">/ Minggu</span></h3>
             </div>
           </div>
         </div>
 
-        <!-- Spesifikasi bawaan UI template Carbook -->
+        <!-- Spesifikasi bawaan UI template Carbook (Dark Theme) -->
       	<div class="row my-4">
       		<div class="col-md d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services p-3 rounded shadow-sm w-100" style="background-color: #1a1a1a; border: 1px solid #333;">
@@ -151,7 +128,7 @@ $mobil = isset($cars[$id]) ?$cars[$id] :$cars[1];
             </div>      
           </div>
           <div class="col-md d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services bg-white p-3 rounded shadow-sm">
+            <div class="media block-6 services p-3 rounded shadow-sm w-100" style="background-color: #1a1a1a; border: 1px solid #333;">
               <div class="media-body py-md-4">
               	<div class="d-flex align-items-center">
 	              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-pistons"></span></div>
@@ -163,7 +140,7 @@ $mobil = isset($cars[$id]) ?$cars[$id] :$cars[1];
             </div>      
           </div>
           <div class="col-md d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services bg-white p-3 rounded shadow-sm">
+            <div class="media block-6 services p-3 rounded shadow-sm w-100" style="background-color: #1a1a1a; border: 1px solid #333;">
               <div class="media-body py-md-4">
               	<div class="d-flex align-items-center">
 	              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-car-seat"></span></div>
@@ -175,7 +152,7 @@ $mobil = isset($cars[$id]) ?$cars[$id] :$cars[1];
             </div>      
           </div>
           <div class="col-md d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services bg-white p-3 rounded shadow-sm">
+            <div class="media block-6 services p-3 rounded shadow-sm w-100" style="background-color: #1a1a1a; border: 1px solid #333;">
               <div class="media-body py-md-4">
               	<div class="d-flex align-items-center">
 	              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-diesel"></span></div>
@@ -204,4 +181,3 @@ $mobil = isset($cars[$id]) ?$cars[$id] :$cars[1];
     <script src="js/main.js"></script>
   </body>
 </html>
-	              	<div class="icon d-flex align-items-center justify-content-center" style="background-color: #ffcc00 !important; color: #000 !important; width: 60px; height: 60px; border-

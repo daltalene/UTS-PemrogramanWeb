@@ -22,38 +22,27 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/style.css">
-    <!-- CSS Dark Theme Update dari Teman -->
     <link rel="stylesheet" href="css/dark-theme.css">
-    
-    <style>
-      /* Style khusus tombol aksi melengkung (Pill) */
-      .btn-outline-pill {
-        border-radius: 20px;
-        padding: 2px 14px;
-        font-size: 13px;
-        font-weight: 500;
-      }
-    </style>
   </head>
-  <body class="bg-light">
+  <body>
 
-    <!-- Navbar Dinamis Multi-Level (Admin & User) -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary ftco-navbar-light awake" id="ftco-navbar" style="background: #1089ff !important; top: 0; position: relative;">
+    <!-- Navbar Dark Theme -->
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
       <div class="container">
-        <a class="navbar-brand text-white" href="index.php">Car<span style="color: #01d28e;">Book Admin</span></a>
+        <a class="navbar-brand" href="index.php">Car<span>Book Admin</span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="oi oi-menu"></span> Menu
         </button>
 
         <div class="collapse navbar-collapse" id="ftco-nav">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a href="index.php" class="nav-link text-white">Home</a></li>
-            <li class="nav-item"><a href="car.php" class="nav-link text-white">Katalog</a></li>
+            <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="car.php" class="nav-link">Katalog</a></li>
 
             <?php if (isset($_SESSION['admin'])) { ?>
-              <li class="nav-item active"><a href="admin.php" style="color: #01d28e !important;" class="nav-link">Dashboard Admin</a></li>
-              <li class="nav-item"><a href="#" class="nav-link text-white">Halo, <?php echo $_SESSION['admin']; ?></a></li>
-              <li class="nav-item"><a href="logout.php" class="nav-link text-white font-weight-bold" onclick="return confirm('Yakin ingin logout?')">Logout</a></li>
+              <li class="nav-item active"><a href="admin.php" class="nav-link">Dashboard Admin</a></li>
+              <li class="nav-item"><a href="#" class="nav-link">Halo, <?php echo $_SESSION['admin']; ?></a></li>
+              <li class="nav-item"><a href="logout.php" class="nav-link font-weight-bold" onclick="return confirm('Yakin ingin logout?')">Logout</a></li>
             <?php } ?>
 
           </ul>
@@ -65,15 +54,14 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
     <section class="ftco-section py-5">
       <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
-          <h2 class="font-weight-bold text-dark mb-0">Kelola Data Mobil (CRUD)</h2>
-          <!-- Tombol Tambah Mobil -->
-          <button type="button" class="btn btn-primary font-weight-bold" style="border-radius: 8px;" data-toggle="modal" data-target="#modalTambah">
+          <h2 class="font-weight-bold mb-0">Kelola Data Mobil (CRUD)</h2>
+          <button type="button" class="btn btn-primary font-weight-bold" data-toggle="modal" data-target="#modalTambah">
             + Tambah Mobil Baru
           </button>
         </div>
 
-        <!-- Tabel Data Mobil Dinamis -->
-        <div class="table-responsive bg-white p-4 rounded shadow-sm border">
+        <!-- Tabel Data Mobil Dark Theme -->
+        <div class="table-responsive p-4 rounded shadow-sm border">
           <table class="table table-bordered table-striped text-center align-middle mb-0">
             <thead class="thead-dark">
               <tr>
@@ -93,14 +81,14 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
               <tr>
                 <td class="align-middle"><?php echo $no++; ?></td>
                 <td class="align-middle"><img src="images/<?php echo $baris['gambar']; ?>" width="80" class="rounded"></td>
-                <td class="align-middle font-weight-bold text-dark"><?php echo $baris['nama_mobil']; ?></td>
+                <td class="align-middle font-weight-bold"><?php echo $baris['nama_mobil']; ?></td>
                 <td class="align-middle"><?php echo $baris['merk']; ?></td>
                 <td class="align-middle">Rp <?php echo number_format($baris['harga_sewa'], 0, ',', '.'); ?></td>
                 <td class="align-middle">
                   <div class="d-flex justify-content-center align-items-center" style="gap: 5px;">
-                    <a href="car-single.php?id=<?php echo $baris['id_mobil']; ?>" class="btn btn-outline-secondary btn-outline-pill">Lihat</a>
-                    <a href="edit.php?id=<?php echo $baris['id_mobil']; ?>" class="btn btn-outline-primary btn-outline-pill">Ubah</a>
-                    <a href="prosesHapus.php?id=<?php echo $baris['id_mobil']; ?>" class="btn btn-outline-danger btn-outline-pill" onclick="return confirm('Hapus data mobil ini?')">Hapus</a>
+                    <a href="car-single.php?id=<?php echo $baris['id_mobil']; ?>" class="btn btn-outline-secondary btn-sm">Lihat</a>
+                    <a href="update_mobil.php?id=<?php echo $baris['id_mobil']; ?>" class="btn btn-warning btn-sm font-weight-bold">Ubah</a>
+                    <a href="hapus_mobil.php?id=<?php echo $baris['id_mobil']; ?>" class="btn btn-danger btn-sm font-weight-bold" onclick="return confirm('Hapus data mobil ini?')">Hapus</a>
                   </div>
                 </td>
               </tr>
@@ -123,22 +111,22 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form action="prosesTambah.php" method="POST" enctype="multipart/form-data">
+          <form action="tambah_mobil.php" method="POST" enctype="multipart/form-data">
             <div class="modal-body">
               <div class="form-group text-left">
-                <label class="font-weight-bold text-dark">Nama Mobil</label>
+                <label class="font-weight-bold">Nama Mobil</label>
                 <input type="text" name="nama_mobil" class="form-control" placeholder="Contoh: Porsche 911 GT3" required>
               </div>
               <div class="form-group text-left">
-                <label class="font-weight-bold text-dark">Merek</label>
+                <label class="font-weight-bold">Merek</label>
                 <input type="text" name="merek" class="form-control" placeholder="Contoh: Porsche" required>
               </div>
               <div class="form-group text-left">
-                <label class="font-weight-bold text-dark">Harga per Hari (Rp)</label>
+                <label class="font-weight-bold">Harga per Hari (Rp)</label>
                 <input type="number" name="harga" class="form-control" placeholder="Contoh: 15000000" required>
               </div>
               <div class="form-group text-left">
-                <label class="font-weight-bold text-dark">Foto Mobil</label>
+                <label class="font-weight-bold">Foto Mobil</label>
                 <input type="file" name="foto" class="form-control-file text-muted" required>
               </div>
             </div>

@@ -18,22 +18,23 @@ if (isset($_SESSION['admin'])) {
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dark-theme.css">
   </head>
-  <body class="bg-light">
+  <body>
     
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary ftco-navbar-light awake" id="ftco-navbar" style="background: #1089ff !important; top: 0; position: relative;">
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
       <div class="container">
-        <a class="navbar-brand text-white" href="index.php">Car<span style="color: #01d28e;">Book</span></a>
+        <a class="navbar-brand" href="index.php">Car<span>Book Admin</span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="oi oi-menu"></span> Menu
         </button>
 
         <div class="collapse navbar-collapse" id="ftco-nav">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a href="index.php" class="nav-link text-white">Home</a></li>
-            <li class="nav-item"><a href="car.php" class="nav-link text-white">Katalog</a></li>
-            <li class="nav-item"><a href="login.php" class="nav-link text-white">Login</a></li>
-            <li class="nav-item active"><a href="login_admin.php" class="nav-link" style="color: #01d28e !important;">Login Admin</a></li>
+            <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="car.php" class="nav-link">Katalog</a></li>
+            <li class="nav-item"><a href="login.php" class="nav-link">Login</a></li>
+            <li class="nav-item active"><a href="login_admin.php" class="nav-link">Login Admin</a></li>
           </ul>
         </div>
       </div>
@@ -42,36 +43,33 @@ if (isset($_SESSION['admin'])) {
     <section class="ftco-section py-5">
       <div class="container">
         <div class="row justify-content-center">
-          <div class="col-md-5">
-            <div class="bg-white p-5 rounded shadow-sm text-center border">
-              <h3 class="mb-4 font-weight-bold text-dark">Login Admin</h3>
-              
-              <!-- ALERT ERROR MERAH PERSIS DOSEN -->
-              <?php if (isset($_GET['pesan']) && $_GET['pesan'] == 'gagal') { ?>
-                <div class="alert alert-danger text-left p-3 mb-4" role="alert" style="border-radius: 8px; font-size: 14px;">
-                  Username atau password salah.
-                </div>
-              <?php } ?>
-
-              <form action="prosesLogin.php" method="POST">
-                <input type="hidden" name="level" value="admin">
-                <div class="form-group text-left mb-3">
-                  <label class="font-weight-bold text-dark">Username</label>
-                  <input type="text" name="username" class="form-control" placeholder="Masukkan Username" required>
-                </div>
-                <div class="form-group text-left mb-4">
-                  <label class="font-weight-bold text-dark">Password</label>
-                  <input type="password" name="password" class="form-control" placeholder="Masukkan Password" required>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block py-3 font-weight-bold">
-                  Masuk
-                </button>
-              </form>
-
-              <div class="mt-4">
-                <a href="index.php" class="text-primary small">← Kembali ke beranda</a>
+          <div class="col-md-6 block-9 mb-md-5">
+            <h2 class="text-center mb-4 font-weight-bold">Login Admin</h2>
+            
+            <?php if (isset($_GET['pesan']) && $_GET['pesan'] == 'gagal') { ?>
+              <div class="alert alert-danger text-left p-3 mb-4" role="alert" style="border-radius: 8px; font-size: 14px;">
+                Username atau password salah.
               </div>
-            </div>
+            <?php } ?>
+
+            <form action="prosesLogin.php" method="POST" class="p-5 contact-form rounded shadow-sm border">
+              <input type="hidden" name="level" value="admin">
+              <div class="form-group">
+                <label for="username" class="font-weight-bold">Username</label>
+                <input type="text" name="username" class="form-control" placeholder="Masukkan Username Admin" required>
+              </div>
+              <div class="form-group">
+                <label for="password" class="font-weight-bold">Password</label>
+                <input type="password" name="password" class="form-control" placeholder="Masukkan Password Admin" required>
+              </div>
+              <div class="form-group mb-4">
+                <input type="submit" value="Masuk Sebagai Admin" class="btn btn-primary py-3 px-5 btn-block font-weight-bold">
+              </div>
+              <div class="text-center">
+                <a href="index.php" class="small">← Kembali ke Beranda</a>
+              </div>
+            </form>
+
           </div>
         </div>
       </div>

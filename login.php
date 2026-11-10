@@ -31,14 +31,11 @@ if (isset($_SESSION['user'])) {
 
         <div class="collapse navbar-collapse" id="ftco-nav">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a href="index.php" class="nav-link text-white">Home</a></li>
-            <li class="nav-item"><a href="car.php" class="nav-link text-white">Katalog</a></li>
-            <li class="nav-item active"><a href="login.php" class="nav-link" style="color: #01d28e !important;">Login</a></li>
-            <li class="nav-item"><a href="login_admin.php" class="nav-link text-white">Login Admin</a></li>
             <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
             <li class="nav-item"><a href="car.php" class="nav-link">Katalog</a></li>
+            <li class="nav-item"><a href="register.php" class="nav-link">Register</a></li>
             <li class="nav-item active"><a href="login.php" class="nav-link">Login</a></li>
-            <li class="nav-item"><a href="admin.php" class="nav-link">Login Admin</a></li>
+            <li class="nav-item"><a href="login_admin.php" class="nav-link">Login Admin</a></li>
           </ul>
         </div>
       </div>
@@ -47,40 +44,17 @@ if (isset($_SESSION['user'])) {
     <section class="ftco-section py-5">
       <div class="container">
         <div class="row justify-content-center">
-          <div class="col-md-5">
-            <div class="bg-white p-5 rounded shadow-sm text-center border">
-              <h3 class="mb-4 font-weight-bold text-dark">Login Pelanggan</h3>
-              
-              <!-- ALERT ERROR MERAH PERSIS DOSEN -->
-              <?php if (isset($_GET['pesan']) && $_GET['pesan'] == 'gagal') { ?>
-                <div class="alert alert-danger text-left p-3 mb-4" role="alert" style="border-radius: 8px; font-size: 14px;">
-                  Username atau password salah.
-                </div>
-              <?php } ?>
-
-              <form action="prosesLogin.php" method="POST">
-                <input type="hidden" name="level" value="user">
-                <div class="form-group text-left mb-3">
-                  <label class="font-weight-bold text-dark">Username</label>
-                  <input type="text" name="username" class="form-control" placeholder="Masukkan Username" required>
-                </div>
-                <div class="form-group text-left mb-4">
-                  <label class="font-weight-bold text-dark">Password</label>
-                  <input type="password" name="password" class="form-control" placeholder="Masukkan Password" required>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block py-3 font-weight-bold">
-                  Masuk
-                </button>
-              </form>
-
-              <div class="mt-4">
-                <p class="mb-0 text-dark">Belum punya akun? <a href="register.php" class="text-primary font-weight-bold">Daftar Sekarang</a></p>
-              </div>
-            </div>
           <div class="col-md-6 block-9 mb-md-5">
-            <h2 class="text-center mb-4 font-weight-bold">Login Admin / User</h2>
+            <h2 class="text-center mb-4 font-weight-bold">Login Pelanggan</h2>
             
-            <form action="login.php" method="POST" class="p-5 contact-form rounded shadow-sm border">
+            <?php if (isset($_GET['pesan']) && $_GET['pesan'] == 'gagal') { ?>
+              <div class="alert alert-danger text-left p-3 mb-4" role="alert" style="border-radius: 8px; font-size: 14px;">
+                Username atau password salah.
+              </div>
+            <?php } ?>
+
+            <form action="prosesLogin.php" method="POST" class="p-5 contact-form rounded shadow-sm border">
+              <input type="hidden" name="level" value="user">
               <div class="form-group">
                 <label for="username" class="font-weight-bold">Username</label>
                 <input type="text" name="username" class="form-control" placeholder="Masukkan Username" required>
@@ -89,8 +63,11 @@ if (isset($_SESSION['user'])) {
                 <label for="password" class="font-weight-bold">Password</label>
                 <input type="password" name="password" class="form-control" placeholder="Masukkan Password" required>
               </div>
-              <div class="form-group mb-0">
+              <div class="form-group mb-4">
                 <input type="submit" value="Masuk Ke Akun" class="btn btn-primary py-3 px-5 btn-block font-weight-bold">
+              </div>
+              <div class="text-center">
+                <p class="mb-0">Belum punya akun? <a href="register.php" class="font-weight-bold">Daftar Sekarang</a></p>
               </div>
             </form>
 
