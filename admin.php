@@ -27,7 +27,6 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
         padding-top: 120px !important;
         padding-bottom: 60px !important;
       }
-
       .btn-tambah-mobil {
         background-color: #01d28e !important;
         color: #ffffff !important;
@@ -43,7 +42,11 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
         background-color: #00b377 !important;
         color: #ffffff !important;
       }
-
+      .btn-batal-dark {
+        background-color: #3a3a3a !important;
+        color: #ffffff !important;
+        border: 1px solid #555 !important;
+      }
       .modal-content {
         background-color: #1a1a1a !important;
         color: #ffffff !important;
@@ -59,6 +62,7 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
       }
       .modal label {
         color: #ffffff !important;
+        font-size: 13px;
       }
     </style>
   </head>
@@ -88,7 +92,6 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
     </nav>
 
     <div class="container main-admin-content">
-      
       <div class="d-flex justify-content-between align-items-center mb-4 p-3 rounded" style="background-color: #1a1a1a; border: 1px solid #333;">
         <h3 class="font-weight-bold text-white mb-0">Kelola Data Mobil</h3>
         <button type="button" class="btn btn-tambah-mobil" data-toggle="modal" data-target="#modalTambah">
@@ -105,6 +108,7 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
               <th>FOTO</th>
               <th>NAMA MOBIL</th>
               <th>MEREK</th>
+              <th>SPESIFIKASI RINGKAS</th>
               <th>HARGA / HARI</th>
               <th>AKSI</th>
             </tr>
@@ -119,6 +123,11 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
               <td class="align-middle"><img src="images/<?php echo $baris['gambar']; ?>" width="80" class="rounded"></td>
               <td class="align-middle font-weight-bold"><?php echo $baris['nama_mobil']; ?></td>
               <td class="align-middle"><?php echo $baris['merk']; ?></td>
+              <td class="align-middle text-left" style="font-size: 12px;">
+                <div>• Transmisi: <b><?php echo !empty($baris['transmisi']) ? $baris['transmisi'] : 'Automatic'; ?></b></div>
+                <div>• Kapasitas: <b><?php echo !empty($baris['kapasitas']) ? $baris['kapasitas'] : '2 Kursi'; ?></b></div>
+                <div>• BBM: <b><?php echo !empty($baris['bahan_bakar']) ? $baris['bahan_bakar'] : 'Bensin'; ?></b></div>
+              </td>
               <td class="align-middle">Rp <?php echo number_format($baris['harga_sewa'], 0, ',', '.'); ?></td>
               <td class="align-middle">
                 <div class="d-flex justify-content-center align-items-center" style="gap: 5px;">
@@ -134,39 +143,92 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
           </tbody>
         </table>
       </div>
-
     </div>
 
+    <!-- Modal Form Tambah Mobil Lengkap dengan Spesifikasi -->
     <div class="modal fade" id="modalTambah" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title font-weight-bold text-white">Tambah Data Mobil Baru</h5>
+            <h5 class="modal-title font-weight-bold text-white">Tambah Data & Spesifikasi Mobil</h5>
             <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <form action="tambah_mobil.php" method="POST" enctype="multipart/form-data">
             <div class="modal-body">
-              <div class="form-group text-left">
-                <label class="font-weight-bold">Nama Mobil</label>
-                <input type="text" name="nama_mobil" class="form-control" placeholder="Contoh: Porsche 911 GT3" required>
+              <div class="form-row">
+                <div class="form-group col-md-6 text-left">
+                  <label class="font-weight-bold">Nama Mobil</label>
+                  <input type="text" name="nama_mobil" class="form-control" placeholder="Contoh: Porsche 911 GT3" required>
+                </div>
+                <div class="form-group col-md-6 text-left">
+                  <label class="font-weight-bold">Merek</label>
+                  <input type="text" name="merk" class="form-control" placeholder="Contoh: Porsche" required>
+                </div>
               </div>
-              <div class="form-group text-left">
-                <label class="font-weight-bold">Merek</label>
-                <input type="text" name="merek" class="form-control" placeholder="Contoh: Porsche" required>
+
+              <div class="form-row">
+                <div class="form-group col-md-4 text-left">
+                  <label class="font-weight-bold">Harga per Hari (Rp)</label>
+                  <input type="number" name="harga_sewa" class="form-control" placeholder="Contoh: 15000000" required>
+                </div>
+                <div class="form-group col-md-4 text-left">
+                  <label class="font-weight-bold">Tahun Produksi</label>
+                  <input type="text" name="tahun_produksi" class="form-control" placeholder="Contoh: 2023" required>
+                </div>
+                <div class="form-group col-md-4 text-left">
+                  <label class="font-weight-bold">Warna</label>
+                  <input type="text" name="warna" class="form-control" placeholder="Contoh: Hitam Metalik" required>
+                </div>
               </div>
-              <div class="form-group text-left">
-                <label class="font-weight-bold">Harga per Hari (Rp)</label>
-                <input type="number" name="harga" class="form-control" placeholder="Contoh: 15000000" required>
+
+              <div class="form-row">
+                <div class="form-group col-md-4 text-left">
+                  <label class="font-weight-bold">Transmisi</label>
+                  <select name="transmisi" class="form-control" required>
+                    <option value="Automatic">Automatic</option>
+                    <option value="Manual">Manual</option>
+                    <option value="Automatic DCT">Automatic DCT</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-4 text-left">
+                  <label class="font-weight-bold">Kapasitas Penumpang</label>
+                  <input type="text" name="kapasitas" class="form-control" placeholder="Contoh: 2 Kursi / 4 Kursi" required>
+                </div>
+                <div class="form-group col-md-4 text-left">
+                  <label class="font-weight-bold">Jenis Bahan Bakar</label>
+                  <input type="text" name="bahan_bakar" class="form-control" placeholder="Contoh: Pertamax Turbo" required>
+                </div>
               </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-4 text-left">
+                  <label class="font-weight-bold">Jarak Tempuh (Odometer)</label>
+                  <input type="text" name="jarak_tempuh" class="form-control" placeholder="Contoh: 12.000 KM" required>
+                </div>
+                <div class="form-group col-md-4 text-left">
+                  <label class="font-weight-bold">Kapasitas Mesin</label>
+                  <input type="text" name="kapasitas_mesin" class="form-control" placeholder="Contoh: 4.000 cc Boxer-6" required>
+                </div>
+                <div class="form-group col-md-4 text-left">
+                  <label class="font-weight-bold">Tenaga Maksimal</label>
+                  <input type="text" name="tenaga_maksimal" class="form-control" placeholder="Contoh: 502 HP" required>
+                </div>
+              </div>
+
               <div class="form-group text-left">
+                <label class="font-weight-bold">Deskripsi Singkat Kendaraan</label>
+                <textarea name="deskripsi" class="form-control" rows="2" placeholder="Jelaskan kondisi dan keunggulan mobil..."></textarea>
+              </div>
+
+              <div class="form-group text-left mb-0">
                 <label class="font-weight-bold">Foto Mobil</label>
                 <input type="file" name="foto" class="form-control-file text-muted" required>
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+              <button type="button" class="btn btn-batal-dark" data-dismiss="modal">Batal</button>
               <button type="submit" class="btn btn-tambah-mobil">Simpan Data</button>
             </div>
           </form>
