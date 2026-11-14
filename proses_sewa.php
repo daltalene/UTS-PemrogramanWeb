@@ -3,7 +3,7 @@ session_start();
 include 'koneksi.php';
 
 if (!isset($_SESSION['user'])) {
-    echo "<script>alert('Silakan login terlebih dahulu untuk melakukan penyewaan mobil!'); window.location='login.php';</script>";
+    header("location:login.php");
     exit();
 }
 
@@ -25,11 +25,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               ('$username', '$id_mobil', '$nama_mobil', '$merk', '$gambar', '$paket_sewa', '$tanggal_mulai', '$total_harga', '$nama_pemesan', '$no_hp', 'Dikonfirmasi')";
 
     if (mysqli_query($koneksi, $query)) {
-        echo "<script>alert('Pesanan sewa berhasil dikonfirmasi! Anda akan diarahkan ke halaman Riwayat Sewa.'); window.location='riwayat.php';</script>";
+        header("location:profile.php");
+        exit();
     } else {
         echo "Gagal memproses penyewaan: " . mysqli_error($koneksi);
     }
 } else {
     header("location:car.php");
+    exit();
 }
 ?>

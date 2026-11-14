@@ -112,13 +112,44 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
               <th>MEREK</th>
               <th>SPESIFIKASI RINGKAS</th>
               <th>HARGA / HARI</th>
+              <th>STATUS</th>
               <th>AKSI</th>
             </tr>
           </thead>
           <tbody>
             <?php
+            date_default_timezone_set('Asia/Jakarta');
+            $waktu_sekarang = time();
             $no = 1;
+
             while ($baris = mysqli_fetch_assoc($hasil)) {
+              $id_mbl = $baris['id_mobil'];
+              $sedang_disewa = false;
+              $info_selesai = "";
+
+              $cek_sewa = mysqli_query($koneksi, "SELECT * FROM table_sewa WHERE id_mobil='$id_mbl' AND status_sewa='Dikonfirmasi' ORDER BY id_sewa DESC LIMIT 1");
+              if (mysqli_num_rows($cek_sewa) > 0) {
+                $data_sewa = mysqli_fetch_assoc($cek_sewa);
+                preg_match('/(\d+)\s*(Jam|Hari|Minggu)/i', $data_sewa['paket_sewa'], $matches);
+                $durasi = isset($matches[1]) ? (int)$matches[1] : 1;
+                $satuan = isset($matches[2]) ? strtolower($matches[2]) : 'hari';
+
+                $jam_mulai = date('H:i:s', strtotime($data_sewa['waktu_transaksi']));
+                $timestamp_mulai = strtotime($data_sewa['tanggal_mulai'] . ' ' . $jam_mulai);
+
+                if ($satuan == 'jam') {
+                  $timestamp_selesai = strtotime("+$durasi hours", $timestamp_mulai);
+                } elseif ($satuan == 'minggu') {
+                  $timestamp_selesai = strtotime("+" . ($durasi * 7) . " days", $timestamp_mulai);
+                } else {
+                  $timestamp_selesai = strtotime("+$durasi days", $timestamp_mulai);
+                }
+
+                if ($waktu_sekarang < $timestamp_selesai) {
+                  $sedang_disewa = true;
+                  $info_selesai = date('d M Y, H:i', $timestamp_selesai);
+                }
+              }
             ?>
             <tr>
               <td class="align-middle"><?php echo $no++; ?></td>
@@ -131,6 +162,14 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
                 <div>• BBM: <b><?php echo !empty($baris['bahan_bakar']) ? $baris['bahan_bakar'] : 'Bensin'; ?></b></div>
               </td>
               <td class="align-middle">Rp <?php echo number_format($baris['harga_sewa'], 0, ',', '.'); ?></td>
+              <td class="align-middle">
+                <?php if ($sedang_disewa) { ?>
+                  <span class="badge badge-danger px-2 py-1">Sedang Disewa</span>
+                  <div class="text-warning mt-1" style="font-size: 11px;">Selesai: <?php echo $info_selesai; ?></div>
+                <?php } else { ?>
+                  <span class="badge badge-success px-2 py-1" style="background-color: #01d28e;">Tersedia</span>
+                <?php } ?>
+              </td>
               <td class="align-middle">
                 <div class="d-flex justify-content-center align-items-center" style="gap: 5px;">
                   <a href="car-single.php?id=<?php echo $baris['id_mobil']; ?>" class="btn btn-outline-secondary btn-sm">Lihat</a>

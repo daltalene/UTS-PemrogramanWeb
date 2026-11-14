@@ -1,51 +1,50 @@
 <?php
-session_start();
 include 'koneksi.php';
 
-$nama_lengkap = trim($_POST['nama_lengkap']);
-$username     = trim($_POST['username']);
-$password     = $_POST['password'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $nama_lengkap = mysqli_real_escape_string($koneksi, trim($_POST['nama_lengkap']));
+    $email        = mysqli_real_escape_string($koneksi, trim($_POST['email']));
+    $username     = mysqli_real_escape_string($koneksi, trim($_POST['username']));
+    $password     = mysqli_real_escape_string($koneksi, trim($_POST['password']));
 
-//validasi username supaya sesuai dgn ketentuan
-if (!preg_match('/^[a-zA-Z0-9]{5,}$/', $username)) {
-    echo "<script>
-            alert('Username Minimal 5 karakter. Hanya boleh huruf dan angka, tanpa spasi atau karakter khusus.');
-            window.history.back();
-          </script>";
-    exit();
-}
+    //validasi agar sesuai aturan di form register
+    if (empty($nama_lengkap) || empty($email) || empty($username) || empty($password)) {
+        echo "<script>alert('Semua kolom wajib diisi!'); window.location='register.php';</script>";
+        exit();
+    }
 
-//alidasi password agar minimalnya 8 karakter
-if (strlen($password) < 8) {
-    echo "<script>
-            alert('Password Minimal 8 karakter.');
-            window.history.back();
-          </script>";
-    exit();
-}
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "<script>alert('Format email tidak valid!'); window.location='register.php';</script>";
+        exit();
+    }
 
-//cek apakah username sudah ada di database atau belum
-$cek_user = mysqli_query($koneksi, "SELECT * FROM table_user WHERE username='$username'");
-if (mysqli_num_rows($cek_user) > 0) {
-    echo "<script>
-            alert('Username sudah digunakan, silakan pilih username yang lain');
-            window.history.back();
-          </script>";
-    exit();
-}
+    if (!preg_match('/^[a-zA-Z0-9]{5,}$/', $username)) {
+        echo "<script>alert('Username minimal 5 karakter); window.location='register.php';</script>";
+        exit();
+    }
 
-//menyimpan data ke dalam database jika berhasil registrasi
-$query = mysqli_query($koneksi, "INSERT INTO table_user VALUES('', '$username', '$password', '$nama_lengkap')");
+    if (strlen($password) < 8) {
+        echo "<script>alert('Password minimal 8 karakter!'); window.location='register.php';</script>";
+        exit();
+    }
 
-if ($query) {
-    echo "<script>
-            alert('Registrasi berhasil! Silakan login.');
-            window.location='login.php';
-          </script>";
+    //cek apakah username atau email sudah terdaftar
+    $cek = mysqli_query($koneksi, "SELECT * FROM table_user WHERE username='$username' OR email='$email'");
+    if (mysqli_num_rows($cek) > 0) {
+        echo "<script>alert('Username atau Email sudah terdaftar! Silakan gunakan yang lain.'); window.location='register.php';</script>";
+        exit();
+    }
+
+    //simpan data user baru ke database
+    $simpan = mysqli_query($koneksi, "INSERT INTO table_user (nama_lengkap, email, username, password) VALUES ('$nama_lengkap', '$email', '$username', '$password')");
+
+    if ($simpan) {
+        echo "<script>alert('Registrasi berhasil! Silakan login dengan akun Anda.'); window.location='login.php';</script>";
+    } else {
+        echo "<script>alert('Registrasi gagal: " . mysqli_error($koneksi) . "'); window.location='register.php';</script>";
+    }
 } else {
-    echo "<script>
-            alert('Gagal mendaftar, terjadi kesalahan.');
-            window.history.back();
-          </script>";
+    header("location:register.php");
+    exit();
 }
 ?>

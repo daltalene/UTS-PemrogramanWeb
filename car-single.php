@@ -12,6 +12,34 @@ if (!$mobil) {
     exit();
 }
 
+date_default_timezone_set('Asia/Jakarta');
+$sedang_disewa = false;
+$info_selesai  = "";
+
+$cek_sewa = mysqli_query($koneksi, "SELECT * FROM table_sewa WHERE id_mobil='$id' AND status_sewa='Dikonfirmasi' ORDER BY id_sewa DESC LIMIT 1");
+if (mysqli_num_rows($cek_sewa) > 0) {
+    $data_sewa = mysqli_fetch_assoc($cek_sewa);
+    preg_match('/(\d+)\s*(Jam|Hari|Minggu)/i', $data_sewa['paket_sewa'], $matches);
+    $durasi = isset($matches[1]) ? (int)$matches[1] : 1;
+    $satuan = isset($matches[2]) ? strtolower($matches[2]) : 'hari';
+
+    $jam_mulai = date('H:i:s', strtotime($data_sewa['waktu_transaksi']));
+    $timestamp_mulai = strtotime($data_sewa['tanggal_mulai'] . ' ' . $jam_mulai);
+
+    if ($satuan == 'jam') {
+        $timestamp_selesai = strtotime("+$durasi hours", $timestamp_mulai);
+    } elseif ($satuan == 'minggu') {
+        $timestamp_selesai = strtotime("+" . ($durasi * 7) . " days", $timestamp_mulai);
+    } else {
+        $timestamp_selesai = strtotime("+$durasi days", $timestamp_mulai);
+    }
+
+    if (time() < $timestamp_selesai) {
+        $sedang_disewa = true;
+        $info_selesai = date('d M Y, H:i', $timestamp_selesai);
+    }
+}
+
 $harga_hari   = (int)$mobil['harga_sewa'];
 $harga_jam    = (int)($harga_hari * 0.10);
 $harga_minggu = (int)($harga_hari * 6);
@@ -315,6 +343,7 @@ $deskripsi       = (isset($mobil['deskripsi']) && !empty($mobil['deskripsi'])) ?
   </head>
   <body>
     
+    <!-- NAVBAR SERAGAM -->
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
       <div class="container">
         <a class="navbar-brand" href="index.php">Car<span>Book</span></a>
@@ -329,12 +358,10 @@ $deskripsi       = (isset($mobil['deskripsi']) && !empty($mobil['deskripsi'])) ?
 
             <?php if (isset($_SESSION['admin'])) { ?>
               <li class="nav-item"><a href="admin.php" class="nav-link">Dashboard Admin</a></li>
-              <li class="nav-item"><a href="#" class="nav-link">Halo, <?php echo $_SESSION['admin']; ?></a></li>
               <li class="nav-item"><a href="logout.php" class="nav-link font-weight-bold" onclick="return confirm('Yakin ingin logout?')">Logout</a></li>
 
             <?php } elseif (isset($_SESSION['user'])) { ?>
-              <li class="nav-item"><a href="riwayat.php" class="nav-link">Riwayat Sewa</a></li>
-              <li class="nav-item"><a href="#" class="nav-link">Halo, <?php echo $_SESSION['user']; ?></a></li>
+              <li class="nav-item"><a href="profile.php" class="nav-link">Profile</a></li>
               <li class="nav-item"><a href="logout.php" class="nav-link font-weight-bold" onclick="return confirm('Yakin ingin logout?')">Logout</a></li>
 
             <?php } else { ?>
@@ -347,8 +374,24 @@ $deskripsi       = (isset($mobil['deskripsi']) && !empty($mobil['deskripsi'])) ?
       </div>
     </nav>
 
+<?php if (isset($_SESSION['admin']) || isset($_SESSION['user'])) { ?>
+  <div style="position: absolute; top: 82px; left: 0; right: 0; z-index: 10; pointer-events: none;">
+    <div class="container">
+      <span style="font-size: 13px; color: rgba(255, 255, 255, 0.75); letter-spacing: 0.5px; font-weight: 400;">
+        <?php 
+          if (isset($_SESSION['admin'])) {
+            echo "Halo, <strong style='color: #ffffff; font-weight: 600;'>" . htmlspecialchars($_SESSION['admin']) . "</strong>";
+          } elseif (isset($_SESSION['user'])) {
+            echo "Halo, <strong style='color: #ffffff; font-weight: 600;'>" . htmlspecialchars($_SESSION['user']) . "</strong>";
+          }
+        ?>
+      </span>
+    </div>
+  </div>
+<?php } ?>
+
     <section class="ftco-section ftco-car-details pt-5">
-      <div class="container">
+      <div class="container mt-4">
         <div class="row justify-content-center">
           <div class="col-md-12">
             <div class="car-details">
@@ -356,6 +399,17 @@ $deskripsi       = (isset($mobil['deskripsi']) && !empty($mobil['deskripsi'])) ?
               <div class="text text-center mt-4">
                 <span class="subheading" style="color: #e50914 !important; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;"><?php echo $mobil['merk']; ?></span>
                 <h2 class="text-white font-weight-bold"><?php echo $mobil['nama_mobil']; ?></h2>
+                <div class="mt-2">
+                  <?php if ($sedang_disewa) { ?>
+                    <span class="badge badge-danger px-3 py-2" style="font-size: 13px; border-radius: 20px;">
+                      Sedang Disewa (Tersedia kembali: <?php echo $info_selesai; ?> WIB)
+                    </span>
+                  <?php } else { ?>
+                    <span class="badge badge-success px-3 py-2" style="font-size: 13px; border-radius: 20px; background-color: #01d28e;">
+                      Unit Tersedia
+                    </span>
+                  <?php } ?>
+                </div>
               </div>
             </div>
           </div>
@@ -440,9 +494,15 @@ $deskripsi       = (isset($mobil['deskripsi']) && !empty($mobil['deskripsi'])) ?
                       Rp <?php echo number_format($harga_hari, 0, ',', '.'); ?>
                     </span>
                   </div>
-                  <button type="button" class="btn btn-primary py-3 px-4 font-weight-bold btn-book-now">
-                    Sewa Sekarang →
-                  </button>
+                  <?php if ($sedang_disewa) { ?>
+                    <button type="button" class="btn btn-secondary py-3 px-4 font-weight-bold" disabled style="cursor: not-allowed;">
+                      Sedang Disewa (Selesai: <?php echo $info_selesai; ?>)
+                    </button>
+                  <?php } else { ?>
+                    <button type="button" class="btn btn-primary py-3 px-4 font-weight-bold btn-book-now">
+                      Sewa Sekarang →
+                    </button>
+                  <?php } ?>
                 </div>
               </div>
             </div>
