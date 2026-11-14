@@ -40,11 +40,9 @@ include 'koneksi.php';
 
             <?php if (isset($_SESSION['admin'])) { ?>
               <li class="nav-item"><a href="admin.php" class="nav-link">Dashboard Admin</a></li>
-              <li class="nav-item"><a href="#" class="nav-link">Halo, <?php echo $_SESSION['admin']; ?></a></li>
               <li class="nav-item"><a href="logout.php" class="nav-link font-weight-bold" onclick="return confirm('Yakin ingin logout?')">Logout</a></li>
 
             <?php } elseif (isset($_SESSION['user'])) { ?>
-              <li class="nav-item"><a href="#" class="nav-link">Halo, <?php echo $_SESSION['user']; ?></a></li>
               <li class="nav-item"><a href="logout.php" class="nav-link font-weight-bold" onclick="return confirm('Yakin ingin logout?')">Logout</a></li>
 
             <?php } else { ?>
@@ -56,6 +54,22 @@ include 'koneksi.php';
         </div>
       </div>
     </nav>
+
+<?php if (isset($_SESSION['admin']) || isset($_SESSION['user'])) { ?>
+  <div style="position: absolute; top: 82px; left: 0; right: 0; z-index: 10; pointer-events: none;">
+    <div class="container">
+      <span style="font-size: 13px; color: rgba(255, 255, 255, 0.75); letter-spacing: 0.5px; font-weight: 400;">
+        <?php 
+          if (isset($_SESSION['admin'])) {
+            echo "Halo, <strong style='color: #ffffff; font-weight: 600;'>" . htmlspecialchars($_SESSION['admin']) . "</strong>";
+          } elseif (isset($_SESSION['user'])) {
+            echo "Halo, <strong style='color: #ffffff; font-weight: 600;'>" . htmlspecialchars($_SESSION['user']) . "</strong>";
+          }
+        ?>
+      </span>
+    </div>
+  </div>
+<?php } ?>
     
     <div class="hero-wrap ftco-degree-bg" style="background-image: url('images/bg_home.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
@@ -63,6 +77,7 @@ include 'koneksi.php';
         <div class="row no-gutters slider-text justify-content-start align-items-center justify-content-center">
           <div class="col-lg-8 text-center">
           	<div class="text w-100 mb-md-5 pb-md-5">
+
 	            <h1 class="mb-4">Cara Cepat &amp; Mudah Sewa Mobil Sport</h1>
 	            <p style="font-size: 18px;">Nikmati pengalaman berkendara kelas atas dengan armada mobil premium terbaik kami.</p>
 	            <a href="car.php" class="btn btn-primary py-3 px-4 mt-3">Lihat Katalog Mobil</a>

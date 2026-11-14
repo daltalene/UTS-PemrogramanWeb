@@ -42,11 +42,9 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
 
             <?php if (isset($_SESSION['admin'])) { ?>
               <li class="nav-item"><a href="admin.php" class="nav-link">Dashboard Admin</a></li>
-              <li class="nav-item"><a href="#" class="nav-link">Halo, <?php echo $_SESSION['admin']; ?></a></li>
               <li class="nav-item"><a href="logout.php" class="nav-link font-weight-bold" onclick="return confirm('Yakin ingin logout?')">Logout</a></li>
 
             <?php } elseif (isset($_SESSION['user'])) { ?>
-              <li class="nav-item"><a href="#" class="nav-link">Halo, <?php echo $_SESSION['user']; ?></a></li>
               <li class="nav-item"><a href="logout.php" class="nav-link font-weight-bold" onclick="return confirm('Yakin ingin logout?')">Logout</a></li>
 
             <?php } else { ?>
@@ -58,6 +56,22 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
         </div>
       </div>
     </nav>
+
+<?php if (isset($_SESSION['admin']) || isset($_SESSION['user'])) { ?>
+  <div style="position: absolute; top: 82px; left: 0; right: 0; z-index: 10; pointer-events: none;">
+    <div class="container">
+      <span style="font-size: 13px; color: rgba(255, 255, 255, 0.75); letter-spacing: 0.5px; font-weight: 400;">
+        <?php 
+          if (isset($_SESSION['admin'])) {
+            echo "Halo, <strong style='color: #ffffff; font-weight: 600;'>" . htmlspecialchars($_SESSION['admin']) . "</strong>";
+          } elseif (isset($_SESSION['user'])) {
+            echo "Halo, <strong style='color: #ffffff; font-weight: 600;'>" . htmlspecialchars($_SESSION['user']) . "</strong>";
+          }
+        ?>
+      </span>
+    </div>
+  </div>
+<?php } ?>
     
     <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_katalog.jpg'); background-position: center; min-height: 350px;">
       <div class="overlay"></div>
@@ -65,6 +79,8 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
         <div class="row no-gutters slider-text align-items-end justify-content-start py-5">
           <div class="col-md-9 pb-5">
           	<p class="breadcrumbs"><span class="mr-2"><a href="index.php">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Katalog <i class="ion-ios-arrow-forward"></i></span></p>
+            <p class="text-muted mb-0" style="font-size: 14px;">
+            </p>
             <h1 class="mb-3 bread">Pilih Mobil Impian Anda</h1>
           </div>
         </div>

@@ -82,7 +82,6 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
 
             <?php if (isset($_SESSION['admin'])) { ?>
               <li class="nav-item active"><a href="admin.php" class="nav-link">Dashboard Admin</a></li>
-              <li class="nav-item"><a href="#" class="nav-link">Halo, <?php echo $_SESSION['admin']; ?></a></li>
               <li class="nav-item"><a href="logout.php" class="nav-link font-weight-bold" onclick="return confirm('Yakin ingin logout?')">Logout</a></li>
             <?php } ?>
 
@@ -94,6 +93,9 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
     <div class="container main-admin-content">
       <div class="d-flex justify-content-between align-items-center mb-4 p-3 rounded" style="background-color: #1a1a1a; border: 1px solid #333;">
         <h3 class="font-weight-bold text-white mb-0">Kelola Data Mobil</h3>
+        <p class="text-muted mb-0" style="font-size: 14px;">
+          Selamat datang kembali, <span class="font-weight-bold" style="color: #ffcc00;"><?php echo htmlspecialchars($_SESSION['admin']); ?></span>!
+        </p>
         <button type="button" class="btn btn-tambah-mobil" data-toggle="modal" data-target="#modalTambah">
           + Tambah Mobil Baru
         </button>

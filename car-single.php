@@ -12,9 +12,9 @@ if (!$mobil) {
     exit();
 }
 
-$harga_hari   = $mobil['harga_sewa'];
-$harga_jam    = $harga_hari * 0.10;
-$harga_minggu = $harga_hari * 6;
+$harga_hari   = (int)$mobil['harga_sewa'];
+$harga_jam    = (int)($harga_hari * 0.10);
+$harga_minggu = (int)($harga_hari * 6);
 
 // Deteksi spesifikasi realistis berdasarkan Nama & Merek Mobil
 $nama_lower = strtolower($mobil['nama_mobil'] . ' ' . $mobil['merk']);
@@ -153,7 +153,6 @@ if (strpos($nama_lower, 'enzo') !== false) {
     $def_km        = number_format(8000 + ($mobil['id_mobil'] * 1750), 0, ',', '.') . " KM";
 }
 
-// Prioritaskan data dari database jika kolom tersedia & sudah diisi khusus
 $jarak_tempuh    = (isset($mobil['jarak_tempuh']) && !empty($mobil['jarak_tempuh']) && $mobil['jarak_tempuh'] != '12.000 KM') ? $mobil['jarak_tempuh'] : $def_km;
 $transmisi       = (isset($mobil['transmisi']) && !empty($mobil['transmisi']) && $mobil['transmisi'] != 'Automatic') ? $mobil['transmisi'] : $def_transmisi;
 $kursi           = (isset($mobil['kapasitas']) && !empty($mobil['kapasitas']) && $mobil['kapasitas'] != '2 Kursi') ? $mobil['kapasitas'] : $def_kursi;
@@ -192,7 +191,63 @@ $deskripsi       = (isset($mobil['deskripsi']) && !empty($mobil['deskripsi'])) ?
         border: 1px solid #333 !important;
         border-radius: 10px;
       }
-      /* Reset aturan table bawaan style.css agar simetris dan tidak melebar keluar kotak */
+      .rate-card {
+        background-color: #1a1a1a !important;
+        border: 1px solid #333 !important;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        position: relative;
+      }
+      .rate-card:hover {
+        border-color: #777 !important;
+        transform: translateY(-2px);
+      }
+      .rate-card.active-rate {
+        border: 2px solid #e50914 !important;
+        background-color: #221617 !important;
+        box-shadow: 0 4px 15px rgba(229, 9, 20, 0.25) !important;
+      }
+      .rate-badge {
+        font-size: 11px;
+        padding: 3px 10px;
+        border-radius: 20px;
+        background-color: #2b2b2b;
+        color: #aaa;
+        display: inline-block;
+        margin-top: 6px;
+      }
+      .rate-card.active-rate .rate-badge {
+        background-color: #e50914;
+        color: #fff;
+        font-weight: 600;
+      }
+      .rental-config-box {
+        background-color: #1a1a1a !important;
+        border: 1px solid #333 !important;
+        border-radius: 12px;
+      }
+      .rental-config-box .form-control {
+        background-color: #262626 !important;
+        color: #ffffff !important;
+        border: 1px solid #444 !important;
+        height: 46px !important;
+      }
+      .rental-config-box .form-control:focus {
+        border-color: #e50914 !important;
+        box-shadow: none !important;
+      }
+      .rental-config-box label {
+        color: #cccccc;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .total-summary-box {
+        background-color: #121212;
+        border: 1px dashed #444;
+        border-radius: 10px;
+        padding: 18px 22px;
+      }
       .spec-table {
         width: 100% !important;
         min-width: 0 !important;
@@ -274,11 +329,10 @@ $deskripsi       = (isset($mobil['deskripsi']) && !empty($mobil['deskripsi'])) ?
 
             <?php if (isset($_SESSION['admin'])) { ?>
               <li class="nav-item"><a href="admin.php" class="nav-link">Dashboard Admin</a></li>
-              <li class="nav-item"><a href="#" class="nav-link">Halo, <?php echo $_SESSION['admin']; ?></a></li>
               <li class="nav-item"><a href="logout.php" class="nav-link font-weight-bold" onclick="return confirm('Yakin ingin logout?')">Logout</a></li>
 
             <?php } elseif (isset($_SESSION['user'])) { ?>
-              <li class="nav-item"><a href="#" class="nav-link">Halo, <?php echo $_SESSION['user']; ?></a></li>
+              <li class="nav-item"><a href="riwayat.php" class="nav-link">Riwayat Sewa</a></li>
               <li class="nav-item"><a href="logout.php" class="nav-link font-weight-bold" onclick="return confirm('Yakin ingin logout?')">Logout</a></li>
 
             <?php } else { ?>
@@ -290,6 +344,20 @@ $deskripsi       = (isset($mobil['deskripsi']) && !empty($mobil['deskripsi'])) ?
         </div>
       </div>
     </nav>
+
+    <?php if (isset($_SESSION['admin']) || isset($_SESSION['user'])) { ?>
+      <div class="container mt-3">
+        <span style="font-size: 13px; color: rgba(255, 255, 255, 0.75); letter-spacing: 0.5px;">
+          <?php 
+            if (isset($_SESSION['admin'])) {
+              echo "Halo, <strong style='color: #ffffff; font-weight: 600;'>" . htmlspecialchars($_SESSION['admin']) . "</strong>";
+            } elseif (isset($_SESSION['user'])) {
+              echo "Halo, <strong style='color: #ffffff; font-weight: 600;'>" . htmlspecialchars($_SESSION['user']) . "</strong>";
+            }
+          ?>
+        </span>
+      </div>
+    <?php } ?>
 
     <section class="ftco-section ftco-car-details pt-5">
       <div class="container">
@@ -307,21 +375,88 @@ $deskripsi       = (isset($mobil['deskripsi']) && !empty($mobil['deskripsi'])) ?
 
         <div class="row my-4">
           <div class="col-md-4 text-center mb-3 mb-md-0">
-            <div class="p-4 rounded shadow-sm spec-card">
-              <h5 class="text-muted">Sewa Per Jam</h5>
-              <h3 class="font-weight-bold" style="color: #e50914;">Rp <?php echo number_format($harga_jam, 0, ',', '.'); ?> <span style="font-size: 14px; color: #888;">/ Jam</span></h3>
+            <div class="p-4 rounded shadow-sm rate-card" data-paket="jam">
+              <h5 class="text-muted mb-2">Sewa Per Jam</h5>
+              <h3 class="font-weight-bold mb-1" style="color: #e50914;">Rp <?php echo number_format($harga_jam, 0, ',', '.'); ?> <span style="font-size: 14px; color: #888;">/ Jam</span></h3>
+              <span class="rate-badge">Klik untuk pilih paket Jam</span>
             </div>
           </div>
           <div class="col-md-4 text-center mb-3 mb-md-0">
-            <div class="p-4 rounded shadow-sm" style="background-color: #1a1a1a; border: 1px solid #e50914 !important; border-radius: 10px;">
-              <h5 class="text-muted">Sewa Per Hari</h5>
-              <h3 class="font-weight-bold" style="color: #e50914;">Rp <?php echo number_format($harga_hari, 0, ',', '.'); ?> <span style="font-size: 14px; color: #888;">/ Hari</span></h3>
+            <div class="p-4 rounded shadow-sm rate-card active-rate" data-paket="hari">
+              <h5 class="text-muted mb-2">Sewa Per Hari</h5>
+              <h3 class="font-weight-bold mb-1" style="color: #e50914;">Rp <?php echo number_format($harga_hari, 0, ',', '.'); ?> <span style="font-size: 14px; color: #888;">/ Hari</span></h3>
+              <span class="rate-badge">Paket Terpilih (Harian)</span>
             </div>
           </div>
           <div class="col-md-4 text-center">
-            <div class="p-4 rounded shadow-sm spec-card">
-              <h5 class="text-muted">Sewa Per Minggu</h5>
-              <h3 class="font-weight-bold" style="color: #e50914;">Rp <?php echo number_format($harga_minggu, 0, ',', '.'); ?> <span style="font-size: 14px; color: #888;">/ Minggu</span></h3>
+            <div class="p-4 rounded shadow-sm rate-card" data-paket="minggu">
+              <h5 class="text-muted mb-2">Sewa Per Minggu</h5>
+              <h3 class="font-weight-bold mb-1" style="color: #e50914;">Rp <?php echo number_format($harga_minggu, 0, ',', '.'); ?> <span style="font-size: 14px; color: #888;">/ Minggu</span></h3>
+              <span class="rate-badge">Klik untuk pilih paket Minggu</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row my-4">
+          <div class="col-md-12">
+            <div class="p-4 rental-config-box shadow-sm">
+              <div class="d-flex justify-content-between align-items-center mb-3 pb-2" style="border-bottom: 1px solid #333;">
+                <h4 class="font-weight-bold text-white mb-0">Atur Detail & Durasi Penyewaan</h4>
+                <span class="text-muted" style="font-size: 13px;">Sesuaikan durasi untuk menghitung total biaya otomatis</span>
+              </div>
+
+              <div class="row align-items-end">
+                <div class="col-md-3 mb-3 mb-md-0">
+                  <label for="selectPaket">Jenis Paket Sewa</label>
+                  <select id="selectPaket" class="form-control">
+                    <option value="jam">Per Jam (Rp <?php echo number_format($harga_jam, 0, ',', '.'); ?> / jam)</option>
+                    <option value="hari" selected>Per Hari (Rp <?php echo number_format($harga_hari, 0, ',', '.'); ?> / hari)</option>
+                    <option value="minggu">Per Minggu (Rp <?php echo number_format($harga_minggu, 0, ',', '.'); ?> / minggu)</option>
+                  </select>
+                </div>
+
+                <div class="col-md-2 mb-3 mb-md-0">
+                  <label for="inputDurasi" id="labelDurasi">Jumlah Hari</label>
+                  <input type="number" id="inputDurasi" class="form-control text-center font-weight-bold" min="1" max="60" value="1">
+                </div>
+
+                <div class="col-md-4 mb-3 mb-md-0">
+                  <label for="selectLayanan">Opsi Layanan Pengemudi</label>
+                  <select id="selectLayanan" class="form-control">
+                    <option value="0" selected>Lepas Kunci (Self-Drive) - Gratis</option>
+                    <option value="150000">Dengan Sopir (+ Rp 150.000 / hari)</option>
+                  </select>
+                </div>
+
+                <div class="col-md-3">
+                  <label for="inputTanggalMulai">Tanggal Mulai Sewa</label>
+                  <input type="date" id="inputTanggalMulai" class="form-control" value="<?php echo date('Y-m-d'); ?>">
+                </div>
+              </div>
+
+              <div class="total-summary-box mt-4 d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+                <div class="mb-3 mb-md-0">
+                  <div class="text-muted" style="font-size: 13px;">Rincian Pilihan Sewa Anda:</div>
+                  <div class="text-white font-weight-bold" id="textRincianSewa" style="font-size: 15px;">
+                    1 Hari (Lepas Kunci)
+                  </div>
+                  <div class="text-muted mt-1" id="textRincianTambahan" style="font-size: 12px;">
+                    Tarif dasar: Rp <?php echo number_format($harga_hari, 0, ',', '.'); ?> x 1 Hari
+                  </div>
+                </div>
+
+                <div class="text-md-right d-flex flex-column flex-sm-row align-items-sm-center" style="gap: 15px;">
+                  <div>
+                    <span class="d-block text-muted" style="font-size: 12px;">Total Biaya Sewa</span>
+                    <span class="font-weight-bold" id="textTotalHarga" style="font-size: 26px; color: #ffcc00;">
+                      Rp <?php echo number_format($harga_hari, 0, ',', '.'); ?>
+                    </span>
+                  </div>
+                  <button type="button" class="btn btn-primary py-3 px-4 font-weight-bold btn-book-now">
+                    Sewa Sekarang →
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -452,55 +587,60 @@ $deskripsi       = (isset($mobil['deskripsi']) && !empty($mobil['deskripsi'])) ?
 
         <div class="row my-4 justify-content-center">
           <div class="col-md-6 text-center">
-            <button class="btn btn-primary btn-lg btn-block py-3 font-weight-bold btn-book-now" data-nama="<?php echo htmlspecialchars($mobil['nama_mobil']); ?>" data-harga="Rp <?php echo number_format($harga_hari, 0, ',', '.'); ?> / Hari">Sewa Sekarang (Book Now)</button>
-            <a href="car.php" class="btn btn-batal-dark btn-block mt-2 py-2 font-weight-bold">← Kembali ke Katalog</a>
+            <a href="car.php" class="btn btn-batal-dark btn-block py-2 font-weight-bold">← Kembali ke Katalog Mobil</a>
           </div>
         </div>
 
       </div>
     </section>
 
+    <!-- Modal Form Booking Konfirmasi (Terhubung ke proses_sewa.php) -->
     <div class="modal fade" id="modalBooking" tabindex="-1" role="dialog" aria-labelledby="modalBookingLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title font-weight-bold" id="modalBookingLabel">Formulir Sewa Mobil</h5>
+            <h5 class="modal-title font-weight-bold" id="modalBookingLabel">Konfirmasi Penyewaan Mobil</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form action="#" method="POST" onsubmit="alert('Terima kasih! Pemesanan Anda berhasil diproses.'); $('#modalBooking').modal('hide'); return false;">
+          <form action="proses_sewa.php" method="POST">
             <div class="modal-body">
+              <input type="hidden" name="id_mobil" value="<?php echo $mobil['id_mobil']; ?>">
+              <input type="hidden" name="merk" value="<?php echo htmlspecialchars($mobil['merk']); ?>">
+              <input type="hidden" name="gambar" value="<?php echo htmlspecialchars($mobil['gambar']); ?>">
+              <input type="hidden" name="total_harga" id="bookingTotalHargaAngka" value="<?php echo $harga_hari; ?>">
+
               <div class="form-group text-left">
                 <label class="font-weight-bold">Mobil Yang Dipilih</label>
-                <input type="text" id="bookingNamaMobil" class="form-control" readonly>
+                <input type="text" name="nama_mobil" id="bookingNamaMobil" class="form-control" value="<?php echo htmlspecialchars($mobil['nama_mobil']); ?>" readonly>
               </div>
               <div class="form-group text-left">
-                <label class="font-weight-bold">Tarif Sewa</label>
-                <input type="text" id="bookingHargaMobil" class="form-control" readonly>
-              </div>
-              <div class="form-group text-left">
-                <label class="font-weight-bold">Nama Lengkap Pemesan</label>
-                <input type="text" class="form-control" placeholder="Masukkan nama Anda" required>
-              </div>
-              <div class="form-group text-left">
-                <label class="font-weight-bold">Nomor WhatsApp / HP</label>
-                <input type="tel" class="form-control" placeholder="08xxxxxxxxxx" required>
+                <label class="font-weight-bold">Detail Paket & Layanan</label>
+                <input type="text" name="paket_sewa" id="bookingDetailPaket" class="form-control" readonly>
               </div>
               <div class="form-row text-left">
                 <div class="form-group col-md-6">
-                  <label class="font-weight-bold">Tanggal Sewa</label>
-                  <input type="date" class="form-control" required>
+                  <label class="font-weight-bold">Tanggal Mulai Sewa</label>
+                  <input type="date" name="tanggal_mulai" id="bookingTanggal" class="form-control" required>
                 </div>
                 <div class="form-group col-md-6">
-                  <label class="font-weight-bold">Lama Sewa (Hari)</label>
-                  <input type="number" class="form-control" min="1" value="1" required>
+                  <label class="font-weight-bold">Total Pembayaran</label>
+                  <input type="text" id="bookingTotalHarga" class="form-control font-weight-bold" style="color: #ffcc00 !important;" readonly>
                 </div>
+              </div>
+              <div class="form-group text-left">
+                <label class="font-weight-bold">Nama Lengkap Pemesan</label>
+                <input type="text" name="nama_pemesan" class="form-control" placeholder="Masukkan nama lengkap Anda" required>
+              </div>
+              <div class="form-group text-left">
+                <label class="font-weight-bold">Nomor WhatsApp / HP</label>
+                <input type="tel" name="no_hp" class="form-control" placeholder="08xxxxxxxxxx" required>
               </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-batal-dark" data-dismiss="modal">Batal</button>
-              <button type="submit" class="btn btn-primary font-weight-bold">Konfirmasi Pemesanan</button>
+              <button type="submit" class="btn btn-primary font-weight-bold">Konfirmasi & Pesan Sekarang</button>
             </div>
           </form>
         </div>
@@ -513,13 +653,89 @@ $deskripsi       = (isset($mobil['deskripsi']) && !empty($mobil['deskripsi'])) ?
 
     <script>
       $(document).ready(function() {
+        var tarifJam    = <?php echo $harga_jam; ?>;
+        var tarifHari   = <?php echo $harga_hari; ?>;
+        var tarifMinggu = <?php echo $harga_minggu; ?>;
+
+        function formatRupiah(angka) {
+          return 'Rp ' + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        function hitungTotalSewa() {
+          var paket   = $('#selectPaket').val();
+          var durasi  = parseInt($('#inputDurasi').val());
+          var sopir   = parseInt($('#selectLayanan').val());
+
+          if (isNaN(durasi) || durasi < 1) {
+            durasi = 1;
+          }
+
+          var hargaDasar = 0;
+          var satuanTeks = '';
+          var pengaliHariSopir = 1;
+
+          if (paket === 'jam') {
+            hargaDasar = tarifJam;
+            satuanTeks = 'Jam';
+            pengaliHariSopir = Math.ceil(durasi / 24);
+            $('#labelDurasi').text('Jumlah Jam');
+          } else if (paket === 'minggu') {
+            hargaDasar = tarifMinggu;
+            satuanTeks = 'Minggu';
+            pengaliHariSopir = durasi * 7;
+            $('#labelDurasi').text('Jumlah Minggu');
+          } else {
+            hargaDasar = tarifHari;
+            satuanTeks = 'Hari';
+            pengaliHariSopir = durasi;
+            $('#labelDurasi').text('Jumlah Hari');
+          }
+
+          var subtotalMobil = hargaDasar * durasi;
+          var biayaSopir    = sopir * pengaliHariSopir;
+          var totalAkhir    = subtotalMobil + biayaSopir;
+
+          var teksLayanan = (sopir > 0) ? 'Dengan Sopir' : 'Lepas Kunci';
+          var teksRincian = durasi + ' ' + satuanTeks + ' (' + teksLayanan + ')';
+          var teksDetail  = 'Tarif: ' + formatRupiah(hargaDasar) + ' x ' + durasi + ' ' + satuanTeks;
+          if (biayaSopir > 0) {
+            teksDetail += ' + Jasa Sopir (' + formatRupiah(biayaSopir) + ')';
+          }
+
+          $('#textRincianSewa').text(teksRincian);
+          $('#textRincianTambahan').text(teksDetail);
+          $('#textTotalHarga').text(formatRupiah(totalAkhir));
+
+          $('.rate-card').removeClass('active-rate');
+          $('.rate-card[data-paket="jam"] .rate-badge').text('Klik untuk pilih paket Jam');
+          $('.rate-card[data-paket="hari"] .rate-badge').text('Klik untuk pilih paket Hari');
+          $('.rate-card[data-paket="minggu"] .rate-badge').text('Klik untuk pilih paket Minggu');
+
+          var activeCard = $('.rate-card[data-paket="' + paket + '"]');
+          activeCard.addClass('active-rate');
+          activeCard.find('.rate-badge').text('Paket Terpilih');
+
+          $('#bookingDetailPaket').val(teksRincian);
+          $('#bookingTotalHarga').val(formatRupiah(totalAkhir));
+          $('#bookingTotalHargaAngka').val(totalAkhir);
+          $('#bookingTanggal').val($('#inputTanggalMulai').val());
+        }
+
+        $('.rate-card').on('click', function() {
+          var paketDipilih = $(this).data('paket');
+          $('#selectPaket').val(paketDipilih);
+          hitungTotalSewa();
+        });
+
+        $('#selectPaket, #selectLayanan, #inputTanggalMulai').on('change', hitungTotalSewa);
+        $('#inputDurasi').on('input change', hitungTotalSewa);
+
         $('.btn-book-now').on('click', function() {
-          var nama = $(this).data('nama');
-          var harga = $(this).data('harga');
-          $('#bookingNamaMobil').val(nama);
-          $('#bookingHargaMobil').val(harga);
+          hitungTotalSewa();
           $('#modalBooking').modal('show');
         });
+
+        hitungTotalSewa();
       });
     </script>
   </body>
