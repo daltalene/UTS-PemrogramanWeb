@@ -329,10 +329,12 @@ $deskripsi       = (isset($mobil['deskripsi']) && !empty($mobil['deskripsi'])) ?
 
             <?php if (isset($_SESSION['admin'])) { ?>
               <li class="nav-item"><a href="admin.php" class="nav-link">Dashboard Admin</a></li>
+              <li class="nav-item"><a href="#" class="nav-link">Halo, <?php echo $_SESSION['admin']; ?></a></li>
               <li class="nav-item"><a href="logout.php" class="nav-link font-weight-bold" onclick="return confirm('Yakin ingin logout?')">Logout</a></li>
 
             <?php } elseif (isset($_SESSION['user'])) { ?>
               <li class="nav-item"><a href="riwayat.php" class="nav-link">Riwayat Sewa</a></li>
+              <li class="nav-item"><a href="#" class="nav-link">Halo, <?php echo $_SESSION['user']; ?></a></li>
               <li class="nav-item"><a href="logout.php" class="nav-link font-weight-bold" onclick="return confirm('Yakin ingin logout?')">Logout</a></li>
 
             <?php } else { ?>
@@ -344,20 +346,6 @@ $deskripsi       = (isset($mobil['deskripsi']) && !empty($mobil['deskripsi'])) ?
         </div>
       </div>
     </nav>
-
-    <?php if (isset($_SESSION['admin']) || isset($_SESSION['user'])) { ?>
-      <div class="container mt-3">
-        <span style="font-size: 13px; color: rgba(255, 255, 255, 0.75); letter-spacing: 0.5px;">
-          <?php 
-            if (isset($_SESSION['admin'])) {
-              echo "Halo, <strong style='color: #ffffff; font-weight: 600;'>" . htmlspecialchars($_SESSION['admin']) . "</strong>";
-            } elseif (isset($_SESSION['user'])) {
-              echo "Halo, <strong style='color: #ffffff; font-weight: 600;'>" . htmlspecialchars($_SESSION['user']) . "</strong>";
-            }
-          ?>
-        </span>
-      </div>
-    <?php } ?>
 
     <section class="ftco-section ftco-car-details pt-5">
       <div class="container">
