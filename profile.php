@@ -7,7 +7,32 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 
+date_default_timezone_set('Asia/Jakarta');
 $username_lama = mysqli_real_escape_string($koneksi, $_SESSION['user']);
+
+// Otomatis ubah status menjadi 'Selesai' jika durasi sewa sudah habis
+$cek_aktif = mysqli_query($koneksi, "SELECT * FROM table_sewa WHERE username='$username_lama' AND status_sewa='Dikonfirmasi'");
+while ($sewa_aktif = mysqli_fetch_assoc($cek_aktif)) {
+    preg_match('/(\d+)\s*(Jam|Hari|Minggu)/i', $sewa_aktif['paket_sewa'], $matches);
+    $durasi = isset($matches[1]) ? (int)$matches[1] : 1;
+    $satuan = isset($matches[2]) ? strtolower($matches[2]) : 'hari';
+
+    $jam_mulai = !empty($sewa_aktif['waktu_transaksi']) ? date('H:i:s', strtotime($sewa_aktif['waktu_transaksi'])) : '00:00:00';
+    $timestamp_mulai = strtotime($sewa_aktif['tanggal_mulai'] . ' ' . $jam_mulai);
+
+    if ($satuan == 'jam') {
+        $timestamp_selesai = strtotime("+$durasi hours", $timestamp_mulai);
+    } elseif ($satuan == 'minggu') {
+        $timestamp_selesai = strtotime("+" . ($durasi * 7) . " days", $timestamp_mulai);
+    } else {
+        $timestamp_selesai = strtotime("+$durasi days", $timestamp_mulai);
+    }
+
+    if (time() >= $timestamp_selesai) {
+        $id_selesai = (int)$sewa_aktif['id_sewa'];
+        mysqli_query($koneksi, "UPDATE table_sewa SET status_sewa='Selesai' WHERE id_sewa='$id_selesai'");
+    }
+}
 
 // Handler Batalkan Penyewaan (tanpa alert)
 if (isset($_GET['batal_id'])) {
@@ -129,6 +154,16 @@ $query_riwayat = mysqli_query($koneksi, "SELECT * FROM table_sewa WHERE username
         background-color: rgba(1, 210, 142, 0.15);
         color: #01d28e;
         border: 1px solid #01d28e;
+        padding: 4px 11px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 600;
+        display: inline-block;
+      }
+      .badge-selesai {
+        background-color: rgba(59, 130, 246, 0.15);
+        color: #60a5fa;
+        border: 1px solid #3b82f6;
         padding: 4px 11px;
         border-radius: 20px;
         font-size: 11px;
@@ -297,6 +332,8 @@ $query_riwayat = mysqli_query($koneksi, "SELECT * FROM table_sewa WHERE username
                       <td>
                         <?php if ($row['status_sewa'] == 'Dibatalkan') { ?>
                           <span class="badge-batal">Dibatalkan</span>
+                        <?php } elseif ($row['status_sewa'] == 'Selesai') { ?>
+                          <span class="badge-selesai">Selesai</span>
                         <?php } else { ?>
                           <span class="badge-status"><?php echo htmlspecialchars($row['status_sewa']); ?></span>
                         <?php } ?>
@@ -304,7 +341,7 @@ $query_riwayat = mysqli_query($koneksi, "SELECT * FROM table_sewa WHERE username
                       <td>
                         <div class="d-flex flex-column" style="gap: 6px;">
                           <a href="car-single.php?id=<?php echo $row['id_mobil']; ?>" class="btn btn-sewa-lagi">Sewa Lagi</a>
-                          <?php if ($row['status_sewa'] != 'Dibatalkan') { ?>
+                          <?php if ($row['status_sewa'] == 'Dikonfirmasi') { ?>
                             <a href="profile.php?batal_id=<?php echo $row['id_sewa']; ?>" class="btn btn-batal">Batalkan</a>
                           <?php } ?>
                         </div>

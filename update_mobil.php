@@ -30,6 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $tenaga_maksimal = mysqli_real_escape_string($koneksi, $_POST['tenaga_maksimal']);
     $deskripsi       = mysqli_real_escape_string($koneksi, $_POST['deskripsi']);
 
+    $update = false;
+
     if (!empty($_FILES['foto']['name'])) {
         $foto_nama  = $_FILES['foto']['name'];
         $foto_tmp   = $_FILES['foto']['tmp_name'];
