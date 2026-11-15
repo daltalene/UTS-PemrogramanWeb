@@ -187,9 +187,9 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
     	</div>
     </section>
 
-    <!-- Modal Konfirmasi Penyewaan Mobil (Langsung muncul saat klik Book now) -->
+    <!-- Modal Konfirmasi Penyewaan Mobil (Lengkap dengan pilihan Jam / Hari / Minggu & Sopir) -->
     <div class="modal fade" id="modalBookingKatalog" tabindex="-1" role="dialog" aria-labelledby="modalBookingKatalogLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title font-weight-bold" id="modalBookingKatalogLabel">Konfirmasi Penyewaan Mobil</h5>
@@ -197,11 +197,12 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form action="proses_sewa.php" method="POST">
+          <form action="payment.php" method="POST">
             <div class="modal-body">
               <input type="hidden" name="id_mobil" id="quickIdMobil">
               <input type="hidden" name="merk" id="quickMerk">
               <input type="hidden" name="gambar" id="quickGambar">
+              <input type="hidden" name="paket_sewa" id="quickPaketSewaHidden">
               <input type="hidden" name="total_harga" id="quickTotalHargaAngka">
 
               <div class="form-group text-left">
@@ -209,14 +210,26 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
                 <input type="text" name="nama_mobil" id="quickNamaMobil" class="form-control" readonly>
               </div>
 
-              <div class="form-group text-left">
-                <label class="font-weight-bold">Detail Paket & Layanan</label>
-                <select name="paket_sewa" id="quickSelectPaket" class="form-control">
-                  <option value="1 Jam (Lepas Kunci)" data-mult="0.10">1 Jam (Lepas Kunci)</option>
-                  <option value="1 Hari (Lepas Kunci)" data-mult="1">1 Hari (Lepas Kunci)</option>
-                  <option value="1 Hari (Dengan Sopir)" data-mult="1" data-sopir="150000">1 Hari (Dengan Sopir)</option>
-                  <option value="1 Minggu (Lepas Kunci)" data-mult="6">1 Minggu (Lepas Kunci)</option>
-                </select>
+              <div class="form-row text-left">
+                <div class="form-group col-md-4">
+                  <label class="font-weight-bold">Jenis Paket Sewa</label>
+                  <select id="quickJenisPaket" class="form-control">
+                    <option value="Jam">Per Jam</option>
+                    <option value="Hari">Per Hari</option>
+                    <option value="Minggu">Per Minggu</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-3">
+                  <label class="font-weight-bold" id="quickLabelDurasi">Jumlah Jam</label>
+                  <input type="number" id="quickJumlahDurasi" class="form-control text-center font-weight-bold" value="1" min="1" max="30" required>
+                </div>
+                <div class="form-group col-md-5">
+                  <label class="font-weight-bold">Opsi Layanan Pengemudi</label>
+                  <select id="quickOpsiSopir" class="form-control">
+                    <option value="Lepas Kunci">Lepas Kunci (Self-Drive) - Gratis</option>
+                    <option value="Dengan Sopir">Dengan Sopir (+Rp 150.000/hari)</option>
+                  </select>
+                </div>
               </div>
 
               <div class="form-row text-left">
@@ -225,24 +238,25 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
                   <input type="date" name="tanggal_mulai" class="form-control" value="<?php echo date('Y-m-d'); ?>" required>
                 </div>
                 <div class="form-group col-md-6">
-                  <label class="font-weight-bold">Total Pembayaran</label>
+                  <label class="font-weight-bold">Total Pembayaran (<span id="quickRingkasanPaket">1 Jam</span>)</label>
                   <input type="text" id="quickTotalHargaTeks" class="form-control font-weight-bold" style="color: #ffcc00 !important;" readonly>
                 </div>
               </div>
 
-              <div class="form-group text-left">
-                <label class="font-weight-bold">Nama Lengkap Pemesan</label>
-                <input type="text" name="nama_pemesan" class="form-control" placeholder="Masukkan nama lengkap Anda" required>
-              </div>
-
-              <div class="form-group text-left">
-                <label class="font-weight-bold">Nomor WhatsApp / HP</label>
-                <input type="tel" name="no_hp" class="form-control" placeholder="08xxxxxxxxxx" required>
+              <div class="form-row text-left">
+                <div class="form-group col-md-6 mb-0">
+                  <label class="font-weight-bold">Nama Lengkap Pemesan</label>
+                  <input type="text" name="nama_pemesan" class="form-control" placeholder="Masukkan nama lengkap Anda" required>
+                </div>
+                <div class="form-group col-md-6 mb-0">
+                  <label class="font-weight-bold">Nomor WhatsApp / HP</label>
+                  <input type="tel" name="no_hp" class="form-control" placeholder="08xxxxxxxxxx" required>
+                </div>
               </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-batal-dark" data-dismiss="modal">Batal</button>
-              <button type="submit" class="btn btn-primary font-weight-bold">Konfirmasi & Pesan Sekarang</button>
+              <button type="submit" class="btn btn-primary font-weight-bold">Lanjutkan ke Pembayaran</button>
             </div>
           </form>
         </div>
@@ -255,36 +269,69 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
 
     <script>
       $(document).ready(function() {
-        var hargaHarianAktif = 0;
+        var hargaPerHari   = 0;
+        var hargaPerJam    = 0;
+        var hargaPerMinggu = 0;
 
         function formatRupiah(angka) {
           return 'Rp ' + Math.round(angka).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         }
 
         function hitungQuickTotal() {
-          var selectedOpt = $('#quickSelectPaket option:selected');
-          var mult  = parseFloat(selectedOpt.data('mult')) || 0.10;
-          var sopir = parseInt(selectedOpt.data('sopir')) || 0;
-          var total = Math.round(hargaHarianAktif * mult) + sopir;
+          var jenis  = $('#quickJenisPaket').val();
+          var durasi = parseInt($('#quickJumlahDurasi').val()) || 1;
+          if (durasi < 1) { durasi = 1; $('#quickJumlahDurasi').val(1); }
+          var sopir  = $('#quickOpsiSopir').val();
 
+          var tarifSatuan = hargaPerJam;
+          var biayaSopir  = 0;
+
+          if (jenis === 'Jam') {
+            tarifSatuan = hargaPerJam;
+            biayaSopir  = (sopir === 'Dengan Sopir') ? 150000 : 0;
+          } else if (jenis === 'Hari') {
+            tarifSatuan = hargaPerHari;
+            biayaSopir  = (sopir === 'Dengan Sopir') ? (150000 * durasi) : 0;
+          } else if (jenis === 'Minggu') {
+            tarifSatuan = hargaPerMinggu;
+            biayaSopir  = (sopir === 'Dengan Sopir') ? (150000 * 7 * durasi) : 0;
+          }
+
+          var total = (tarifSatuan * durasi) + biayaSopir;
+          var teksPaket = durasi + ' ' + jenis + ' (' + sopir + ')';
+
+          $('#quickLabelDurasi').text('Jumlah ' + jenis);
+          $('#quickRingkasanPaket').text(teksPaket);
+          $('#quickPaketSewaHidden').val(teksPaket);
           $('#quickTotalHargaAngka').val(total);
           $('#quickTotalHargaTeks').val(formatRupiah(total));
         }
 
         $('.btn-quick-book').on('click', function() {
-          hargaHarianAktif = parseInt($(this).data('harga')) || 0;
+          hargaPerHari   = parseInt($(this).data('harga')) || 0;
+          hargaPerJam    = Math.round(hargaPerHari * 0.10);
+          hargaPerMinggu = hargaPerHari * 6;
 
           $('#quickIdMobil').val($(this).data('id'));
           $('#quickNamaMobil').val($(this).data('nama'));
           $('#quickMerk').val($(this).data('merk'));
           $('#quickGambar').val($(this).data('gambar'));
-          $('#quickSelectPaket').val('1 Jam (Lepas Kunci)');
+
+          // Update label harga di dropdown paket sesuai mobil yang diklik
+          $('#quickJenisPaket option[value="Jam"]').text('Per Jam (' + formatRupiah(hargaPerJam) + ')');
+          $('#quickJenisPaket option[value="Hari"]').text('Per Hari (' + formatRupiah(hargaPerHari) + ')');
+          $('#quickJenisPaket option[value="Minggu"]').text('Per Minggu (' + formatRupiah(hargaPerMinggu) + ')');
+
+          $('#quickJenisPaket').val('Jam');
+          $('#quickJumlahDurasi').val(1);
+          $('#quickOpsiSopir').val('Lepas Kunci');
 
           hitungQuickTotal();
           $('#modalBookingKatalog').modal('show');
         });
 
-        $('#quickSelectPaket').on('change', hitungQuickTotal);
+        $('#quickJenisPaket, #quickOpsiSopir').on('change', hitungQuickTotal);
+        $('#quickJumlahDurasi').on('input change', hitungQuickTotal);
       });
     </script>
   </body>

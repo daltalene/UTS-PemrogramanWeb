@@ -500,7 +500,7 @@ $deskripsi       = (isset($mobil['deskripsi']) && !empty($mobil['deskripsi'])) ?
                     </button>
                   <?php } else { ?>
                     <button type="button" class="btn btn-primary py-3 px-4 font-weight-bold btn-book-now">
-                      Sewa Sekarang →
+                      Sewa Sekarang
                     </button>
                   <?php } ?>
                 </div>
@@ -652,7 +652,7 @@ $deskripsi       = (isset($mobil['deskripsi']) && !empty($mobil['deskripsi'])) ?
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form action="proses_sewa.php" method="POST">
+          <form action="payment.php" method="POST">
             <div class="modal-body">
               <input type="hidden" name="id_mobil" value="<?php echo $mobil['id_mobil']; ?>">
               <input type="hidden" name="merk" value="<?php echo htmlspecialchars($mobil['merk']); ?>">
@@ -688,7 +688,7 @@ $deskripsi       = (isset($mobil['deskripsi']) && !empty($mobil['deskripsi'])) ?
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-batal-dark" data-dismiss="modal">Batal</button>
-              <button type="submit" class="btn btn-primary font-weight-bold">Konfirmasi & Pesan Sekarang</button>
+              <button type="submit" class="btn btn-primary font-weight-bold">Lanjutkan ke Pembayaran</button>
             </div>
           </form>
         </div>

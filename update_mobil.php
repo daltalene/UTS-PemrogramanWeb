@@ -140,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <ul class="navbar-nav ml-auto">
             <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
             <li class="nav-item"><a href="car.php" class="nav-link">Katalog</a></li>
-            <li class="nav-item active"><a href="admin.php" class="nav-link">← Kembali ke Dashboard</a></li>
+            <li class="nav-item active"><a href="admin.php" class="nav-link">Kembali ke Dashboard</a></li>
           </ul>
         </div>
       </div>

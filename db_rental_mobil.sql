@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2026 at 02:52 PM
+-- Generation Time: Nov 15, 2026 at 02:20 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -99,6 +99,7 @@ CREATE TABLE `table_sewa` (
   `paket_sewa` varchar(100) NOT NULL,
   `tanggal_mulai` date NOT NULL,
   `total_harga` int(11) NOT NULL,
+  `metode_pembayaran` varchar(50) DEFAULT 'Credit/Debit Card',
   `nama_pemesan` varchar(100) NOT NULL,
   `no_hp` varchar(50) NOT NULL,
   `status_sewa` varchar(50) DEFAULT 'Dikonfirmasi',
@@ -109,12 +110,13 @@ CREATE TABLE `table_sewa` (
 -- Dumping data for table `table_sewa`
 --
 
-INSERT INTO `table_sewa` (`id_sewa`, `username`, `id_mobil`, `nama_mobil`, `merk`, `gambar`, `paket_sewa`, `tanggal_mulai`, `total_harga`, `nama_pemesan`, `no_hp`, `status_sewa`, `waktu_transaksi`) VALUES
-(1, 'shkia', 5, 'BMW 3 Series Gran', 'BMW', 'car-5.jpg', '2 Jam (Lepas Kunci)', '2026-11-14', 1950000, 'shaskia', '081122334455', 'Dibatalkan', '2026-11-14 12:57:45'),
-(2, 'shkia', 1, 'Mercedes SLK Roadster', 'Mercedes-Benz', 'car-1.jpg', '1 Jam (Lepas Kunci)', '2026-11-14', 750000, 'shaskia', '081122334455', 'Dikonfirmasi', '2026-11-14 12:58:40'),
-(3, 'shkia', 10, 'Mercedes-AMG GT R', 'Mercedes-AMG', 'car-10.jpg', '1 Jam (Lepas Kunci)', '2026-11-14', 1435000, 'shaskia', '081122334455', 'Dibatalkan', '2026-11-14 13:26:17'),
-(4, 'shkia', 11, 'Chevrolet Corvette Stingray', 'Chevrolet', 'car-11.jpg', '1 Jam (Lepas Kunci)', '2026-11-14', 1275000, 'shaskia', '081122334455', 'Dikonfirmasi', '2026-11-14 13:27:41'),
-(5, 'shnez', 9, 'Mercedes-AMG GT S', 'Mercedes-AMG', 'car-9.jpg', '1 Jam (Lepas Kunci)', '2026-11-14', 1050000, 'shnez', '081122334455', 'Dikonfirmasi', '2026-11-14 13:30:19');
+INSERT INTO `table_sewa` (`id_sewa`, `username`, `id_mobil`, `nama_mobil`, `merk`, `gambar`, `paket_sewa`, `tanggal_mulai`, `total_harga`, `metode_pembayaran`, `nama_pemesan`, `no_hp`, `status_sewa`, `waktu_transaksi`) VALUES
+(1, 'shkia', 5, 'BMW 3 Series Gran', 'BMW', 'car-5.jpg', '2 Jam (Lepas Kunci)', '2026-11-14', 1950000, 'Credit/Debit Card', 'shaskia', '081122334455', 'Dibatalkan', '2026-11-14 12:57:45'),
+(2, 'shkia', 1, 'Mercedes SLK Roadster', 'Mercedes-Benz', 'car-1.jpg', '1 Jam (Lepas Kunci)', '2026-11-14', 750000, 'Credit/Debit Card', 'shaskia', '081122334455', 'Selesai', '2026-11-14 12:58:40'),
+(3, 'shkia', 10, 'Mercedes-AMG GT R', 'Mercedes-AMG', 'car-10.jpg', '1 Jam (Lepas Kunci)', '2026-11-14', 1435000, 'Credit/Debit Card', 'shaskia', '081122334455', 'Dibatalkan', '2026-11-14 13:26:17'),
+(4, 'shkia', 11, 'Chevrolet Corvette Stingray', 'Chevrolet', 'car-11.jpg', '1 Jam (Lepas Kunci)', '2026-11-14', 1275000, 'Credit/Debit Card', 'shaskia', '081122334455', 'Selesai', '2026-11-14 13:27:41'),
+(5, 'shnez', 9, 'Mercedes-AMG GT S', 'Mercedes-AMG', 'car-9.jpg', '1 Jam (Lepas Kunci)', '2026-11-14', 1050000, 'Credit/Debit Card', 'shnez', '081122334455', 'Dikonfirmasi', '2026-11-14 13:30:19'),
+(6, 'shkia', 11, 'Chevrolet Corvette Stingray', 'Chevrolet', 'car-11.jpg', '1 Minggu (Lepas Kunci)', '2026-11-15', 76500000, 'Credit/Debit Card', 'shaskia', '081122334455', 'Dikonfirmasi', '2026-11-15 01:19:01');
 
 -- --------------------------------------------------------
 
@@ -186,7 +188,7 @@ ALTER TABLE `table_mobil`
 -- AUTO_INCREMENT for table `table_sewa`
 --
 ALTER TABLE `table_sewa`
-  MODIFY `id_sewa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_sewa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `table_user`

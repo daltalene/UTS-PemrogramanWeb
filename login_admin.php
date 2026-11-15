@@ -66,7 +66,7 @@ if (isset($_SESSION['admin'])) {
                 <input type="submit" value="Masuk Sebagai Admin" class="btn btn-primary py-3 px-5 btn-block font-weight-bold">
               </div>
               <div class="text-center">
-                <a href="index.php" class="small">← Kembali ke Beranda</a>
+                <a href="index.php" class="small">Kembali ke Beranda</a>
               </div>
             </form>
 
