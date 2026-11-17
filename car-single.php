@@ -44,7 +44,7 @@ $harga_hari   = (int)$mobil['harga_sewa'];
 $harga_jam    = (int)($harga_hari * 0.10);
 $harga_minggu = (int)($harga_hari * 6);
 
-// Deteksi spesifikasi realistis berdasarkan Nama & Merek Mobil
+//deteksi spesifikasi realistis berdasarkan nama dan merek Mobil
 $nama_lower = strtolower($mobil['nama_mobil'] . ' ' . $mobil['merk']);
 
 if (strpos($nama_lower, 'enzo') !== false) {
@@ -343,7 +343,6 @@ $deskripsi       = (isset($mobil['deskripsi']) && !empty($mobil['deskripsi'])) ?
   </head>
   <body>
     
-    <!-- NAVBAR SERAGAM -->
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
       <div class="container">
         <a class="navbar-brand" href="index.php">Car<span>Book</span></a>
@@ -466,7 +465,7 @@ $deskripsi       = (isset($mobil['deskripsi']) && !empty($mobil['deskripsi'])) ?
                   <label for="selectLayanan">Opsi Layanan Pengemudi</label>
                   <select id="selectLayanan" class="form-control">
                     <option value="0" selected>Lepas Kunci (Self-Drive) - Gratis</option>
-                    <option value="150000">Dengan Sopir (+ Rp 150.000 / hari)</option>
+                    <option value="150000">Dengan Sopir (+ Rp 150.000 /hari)</option>
                   </select>
                 </div>
 
@@ -642,7 +641,7 @@ $deskripsi       = (isset($mobil['deskripsi']) && !empty($mobil['deskripsi'])) ?
       </div>
     </section>
 
-    <!-- Modal Form Booking Konfirmasi (Terhubung ke proses_sewa.php) -->
+    <!-- form Booking Konfirmasi (Terhubung ke proses_sewa.php) -->
     <div class="modal fade" id="modalBooking" tabindex="-1" role="dialog" aria-labelledby="modalBookingLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">

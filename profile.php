@@ -10,7 +10,7 @@ if (!isset($_SESSION['user'])) {
 date_default_timezone_set('Asia/Jakarta');
 $username_lama = mysqli_real_escape_string($koneksi, $_SESSION['user']);
 
-// Otomatis ubah status menjadi 'Selesai' jika durasi sewa sudah habis
+//otomatis ubah status menjadi 'Selesai' kalau durasi sewa sudah habis
 $cek_aktif = mysqli_query($koneksi, "SELECT * FROM table_sewa WHERE username='$username_lama' AND status_sewa='Dikonfirmasi'");
 while ($sewa_aktif = mysqli_fetch_assoc($cek_aktif)) {
     preg_match('/(\d+)\s*(Jam|Hari|Minggu)/i', $sewa_aktif['paket_sewa'], $matches);
@@ -34,7 +34,7 @@ while ($sewa_aktif = mysqli_fetch_assoc($cek_aktif)) {
     }
 }
 
-// Handler Batalkan Penyewaan (tanpa alert)
+//batalkan penyewaan
 if (isset($_GET['batal_id'])) {
     $batal_id = (int)$_GET['batal_id'];
     mysqli_query($koneksi, "UPDATE table_sewa SET status_sewa='Dibatalkan' WHERE id_sewa='$batal_id' AND username='$username_lama'");
@@ -42,7 +42,7 @@ if (isset($_GET['batal_id'])) {
     exit();
 }
 
-// Handler Ubah Profil (tanpa alert saat berhasil)
+//ubah profil
 if (isset($_POST['simpan_profil'])) {
     $nama_baru     = mysqli_real_escape_string($koneksi, trim($_POST['nama_lengkap']));
     $email_baru    = mysqli_real_escape_string($koneksi, trim($_POST['email_baru']));

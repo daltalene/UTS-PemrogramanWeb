@@ -187,7 +187,7 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
     	</div>
     </section>
 
-    <!-- Modal Konfirmasi Penyewaan Mobil (Lengkap dengan pilihan Jam / Hari / Minggu & Sopir) -->
+    <!-- konfirmasi penyewaan mobil -->
     <div class="modal fade" id="modalBookingKatalog" tabindex="-1" role="dialog" aria-labelledby="modalBookingKatalogLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -317,7 +317,7 @@ $hasil = mysqli_query($koneksi, "SELECT * FROM table_mobil ORDER BY id_mobil DES
           $('#quickMerk').val($(this).data('merk'));
           $('#quickGambar').val($(this).data('gambar'));
 
-          // Update label harga di dropdown paket sesuai mobil yang diklik
+          //update label harga di dropdown paket sesuai mobil yang diklik
           $('#quickJenisPaket option[value="Jam"]').text('Per Jam (' + formatRupiah(hargaPerJam) + ')');
           $('#quickJenisPaket option[value="Hari"]').text('Per Hari (' + formatRupiah(hargaPerHari) + ')');
           $('#quickJenisPaket option[value="Minggu"]').text('Per Minggu (' + formatRupiah(hargaPerMinggu) + ')');
